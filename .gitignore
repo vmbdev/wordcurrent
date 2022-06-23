@@ -28,5 +28,6 @@ coverage
 *.sw?
 
 /node_modules/
-.vscode/
+wordcurrent.config.js
 package-lock.json
+MOCKUP.md
