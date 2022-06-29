@@ -1,4 +1,4 @@
-import readline from 'readline/promises';
+import readline from 'readline';
 import fs from 'fs';
 
 class WordList {
@@ -8,23 +8,23 @@ class WordList {
     this._levels = Object.keys(this._flow).map(i => Number.parseInt(i));
   }
 
-  async load() {
+  load() {
     this._packs = {};
 
     for (const pack of this._availableWordPackages) {
-      await this.loadWordList(pack);
+      this.loadWordList(pack);
     }
   }
 
-  async loadWordList(pack) {
+   loadWordList(pack) {
     const rl = readline.createInterface({ input: fs.createReadStream(`./api/wordlists/${pack}.l`) });
     this._packs[pack] = {};
 
     for (const level of this._levels) this._packs[pack][level] = [];
 
-    for await (const line of rl) {
+    rl.on('line', (line) => {
       if (this._levels.includes(line.length)) this._packs[pack][line.length].push(line);
-    }
+    })
   }
 
   generateSet(language) {
