@@ -7,7 +7,7 @@ async function routes (fastify, options, done) {
   }, { prefix: '/api' });
 
   fastify.get('/', async (req, reply) => {
-    reply.sendFile('index.html');
+    return reply.sendFile('index.html');
   });
 
   done();
