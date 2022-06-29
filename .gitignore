@@ -27,7 +27,6 @@ coverage
 *.sln
 *.sw?
 
-/node_modules/
 wordcurrent.config.js
-package-lock.json
 MOCKUP.md
+knexfile.js

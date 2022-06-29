@@ -1,5 +1,6 @@
 import Knex from 'knex';
-import { database } from "../wordcurrent.config.js";
+import knexConfig from "../knexfile.js";
 
-const knex = Knex(database);
+const env = process.env.NODE_ENV || 'development';
+const knex = Knex(knexConfig[env]);
 export default knex;
