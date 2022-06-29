@@ -13,7 +13,7 @@ const __dirname = path.dirname(__filename);
 const fastify = Fastify({ logger: process.env.NODE_ENV === 'production' ? false : true });
 
 if (server.enableCors && server.corsOrigin) fastify.register(cors, { origin: server.corsOrigin });
-fastify.register(fstatic, { root: path.join(__dirname, 'dist') });
+fastify.register(fstatic, { root: path.join(__dirname, '../dist') });
 fastify.register(routes);
 
 wordlist.load();
