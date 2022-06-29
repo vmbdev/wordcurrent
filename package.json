@@ -7,10 +7,12 @@
     "build": "vite build",
     "preview": "vite preview --port 4173",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
-    "server-dev": "nodemon --watch api api/server.js"
+    "server-dev": "nodemon --watch api api/server.js",
+    "server-prod": "NODE_ENV=production node ./api/server.js"
   },
   "dependencies": {
     "@fastify/cors": "^8.0.0",
+    "@fastify/static": "^6.4.0",
     "fastify": "^4.0.3",
     "knex": "^2.1.0",
     "nanoid": "^4.0.0",

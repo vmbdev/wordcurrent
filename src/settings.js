@@ -1,3 +1,3 @@
 export default {
-  endpoint: 'http://127.0.0.1:5010/api'
+  endpoint: process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:5010/api'
 }
