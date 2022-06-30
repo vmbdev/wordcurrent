@@ -35,7 +35,6 @@ const thing = (event) => {
   </div>
   <div class="keyboard__row">
     <button class="key" name="key" value="enter">SEND</button>
-    <button class="key" name="key" value="q">Q</button>
     <button class="key" name="key" value="z">Z</button>
     <button class="key" name="key" value="x">X</button>
     <button class="key" name="key" value="c">C</button>
