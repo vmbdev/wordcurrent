@@ -1,16 +1,11 @@
 <script setup>
-import { ref } from 'vue';
 
 const emit = defineEmits(['startPressed']);
-const props = defineProps({
-  hidden: Boolean
-})
 </script>
 
 <template>
 <button
   class="startbutton"
-  :class="{ 'startbutton--hidden': props.hidden }"
   @click="() => { emit('startPressed') }"
 >
   Start
@@ -25,9 +20,5 @@ const props = defineProps({
   border: 0;
   width: 120px;
   height: 70px;
-
-  &--hidden {
-    visibility: hidden;
-  }
 }
 </style>

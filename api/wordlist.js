@@ -3,7 +3,7 @@ import fs from 'fs';
 
 class WordList {
   constructor(options) {
-    this._availableWordPackages = options.wordPackages;
+    this._availableWordpacks = options.wordpacks;
     this._flow = options.flow;
     this._levels = Object.keys(this._flow).map(i => Number.parseInt(i));
   }
@@ -11,7 +11,7 @@ class WordList {
   load() {
     this._packs = {};
 
-    for (const pack of this._availableWordPackages) {
+    for (const pack of this._availableWordpacks) {
       this.loadWordList(pack);
     }
   }

@@ -2,16 +2,16 @@
 import { onMounted } from 'vue';
 import settings from '../settings.js';
 
-const emit = defineEmits(['updateWordPacks', 'selectWordPack']);
+const emit = defineEmits(['updateWordpacks', 'selectWordpack']);
 const props = defineProps({
-  wordPacks: Array,
+  wordpacks: Array,
   currentWp: String,
 });
 
 onMounted(() => {
   fetch(`${settings.endpoint}/game/wordpacks`)
   .then((res) => res.json())
-  .then((data) => { emit('updateWordPacks', data.wordPacks) });
+  .then((data) => { emit('updateWordpacks', data.wordpacks) });
 });
 
 </script>
@@ -20,9 +20,9 @@ onMounted(() => {
 <div class="langselector">
   <span
     class="langselector__item"
-    v-for="pack in props.wordPacks"
+    v-for="pack in props.wordpacks"
     :class="{ 'langselector__item--active': pack === props.currentWp }"
-    @click="() => { emit('selectWordPack', pack) }"
+    @click="() => { emit('selectWordpack', pack) }"
   >
     {{ pack.slice(0,1).toUpperCase() + pack.slice(1) }}
   </span>

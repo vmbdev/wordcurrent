@@ -1,21 +1,11 @@
 <script setup>
-import { ref } from 'vue';
-
-const props = defineProps({ limit: Number });
-const emit = defineEmits(['submit']);
-
-const word = ref('');
+const props = defineProps({
+  word: String,
+})
 </script>
 
 <template>
-<input
-  type="text"
-  autocomplete="off"
-  class="wordinput"
-  :maxlength="props.limit"
-  v-model="word"
-  @keyup.enter="() => { emit('submit', word) }"
-/>
+<div class="wordinput">{{ props.word }}</div>
 </template>
 
 <style lang="scss">
@@ -28,14 +18,7 @@ const word = ref('');
   text-transform: uppercase;
   padding: 8px;
   text-align: center;
-  border-top: 0;
-  border-left: 0;
-  border-right: 0;
+  border-bottom: 3px solid black;
   margin: 16px 0;
-
-  &:focus {
-    outline: none;
-    border-bottom: 3px solid black;
-  }
 }
 </style>
