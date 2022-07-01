@@ -40,8 +40,9 @@ const startGame = () => {
   .then(data => {
     game.scrambledWord = data.word;
     game.key = data.key;
-    game.isRunning = true;
     game.time = data.time;
+    game.points = 0;
+    game.isRunning = true;
   });
 }
 
