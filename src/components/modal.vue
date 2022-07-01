@@ -1,9 +1,14 @@
 <script setup>
+import CloseButton from './closebutton.vue';
+
+const emit = defineEmits(['close']);
+const props = defineProps({ caller: String });
 
 </script>
 
 <template>
 <div class="modal">
+  <CloseButton @close="() => { emit('close', props.caller); }" />
   <div class="modal__content">
     <slot></slot>
   </div>
@@ -21,6 +26,7 @@ $width: 500px;
   left: calc(50% - calc($width / 2));
   width: $width;
   height: 300px;
+  transition: all ease 1s;
 
   &__content {
     padding: 25px;

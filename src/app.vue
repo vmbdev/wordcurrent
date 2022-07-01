@@ -42,7 +42,6 @@ const startGame = () => {
     game.key = data.key;
     game.isRunning = true;
     game.time = data.time;
-    console.log(data)
   });
 }
 
@@ -54,7 +53,6 @@ const attempt = () => {
       if (data.attempt === 'correct') game.scrambledWord = data.word;
       currentUserInput.value = '';
       game.points = data.points;
-      console.log(data);
     });
   }
 }
@@ -67,8 +65,8 @@ const keyPressed = (key) => {
 
 const gameTimeout = () => {
   stats.lastPoints = game.points;
-  console.log("test", stats);
   showStats.value = true;
+  game.isRunning = false;
 }
 
 </script>
@@ -76,15 +74,12 @@ const gameTimeout = () => {
 <template>
 <div class="contentwrapper">
   <div v-show="!game.isRunning" class="before-game-starts">
-    <LangSelector
-      :current-wp="game.wordpack"
-      @select-wordpack="setCurrentWp"
-    />
+    <LangSelector :current-wp="game.wordpack" @select-wordpack="setCurrentWp" />
     <StartButton @start-pressed="startGame" />
   </div>
   <div v-show="game.isRunning" class="after-game-starts">
     <div class="gameinfo">
-      <Countdown :from="game.time" @timeout="gameTimeout" />
+      <Countdown :from="game.time" @timeout="gameTimeout" :gameIsRunning="game.isRunning" />
       <Scoreboard :points="game.points" />
     </div>
     <ScrambledWord :word="game.scrambledWord" />
@@ -92,7 +87,11 @@ const gameTimeout = () => {
     <Keyboard @key-pressed="keyPressed" />
   </div>
 </div>
-  <Stats v-if="showStats" :stats="stats" />
+  <Stats
+    v-if="showStats"
+    :stats="stats"
+    @close="() => { showStats = false }"
+  />
 </template>
 
 <style lang="scss">
