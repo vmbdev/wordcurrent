@@ -25,6 +25,7 @@
     "@vitejs/plugin-vue": "^2.3.3",
     "eslint": "^8.5.0",
     "eslint-plugin-vue": "^9.0.0",
+    "nodemon": "^2.0.18",
     "vite": "^2.9.9"
   }
 }

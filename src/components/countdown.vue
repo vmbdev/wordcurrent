@@ -10,20 +10,22 @@ watch(
   () => props.from,
   async (newTime) => {
     if (newTime > 0) {
-      timeLeft.value = newTime,
-      console.log(timeLeft.value);
-      setInterval(() => {
+      timeLeft.value = newTime;
+
+      const countdown = setInterval(() => {
         if (timeLeft.value > 0) timeLeft.value--;
-        else clearInterval();
+        else {
+          emit('timeout');
+          clearInterval(countdown);
+        }
       }, 1000);
-      emit('timeout');
     }
   }
 );
 </script>
 
 <template>
-<div>{{ timeLeft }}</div>
+<div>Time left: {{ timeLeft }}s</div>
 </template>
 
 <style lang="scss">

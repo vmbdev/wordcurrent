@@ -28,5 +28,6 @@ coverage
 *.sw?
 
 wordcurrent.config.js
-MOCKUP.md
 knexfile.js
+MOCKUP.md
+TODO.md

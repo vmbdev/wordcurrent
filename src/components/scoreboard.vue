@@ -5,9 +5,7 @@ const props = defineProps({
 </script>
 
 <template>
-<div class="scoreboard">
-  {{ props.points }}
-</div>
+<div class="scoreboard">Points: {{ props.points }}</div>
 </template>
 
 <style lang="scss">

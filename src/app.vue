@@ -7,10 +7,19 @@ import WordInput from './components/wordinput.vue';
 import Keyboard from './components/keyboard.vue';
 import Countdown from './components/countdown.vue';
 import Scoreboard from './components/scoreboard.vue';
+import Stats from './components/stats.vue';
 import settings from './settings.js';
 
-const wordpacks = ref([]);
 const currentUserInput = ref('');
+const showStats = ref(false);
+const stats = reactive({
+  lastPoints: 0,
+  lastWords: 0,
+  bestWords: 0,
+  bestPoints: 0,
+  totalWords: 0,
+  totalPoints: 0
+});
 
 const game = reactive({
   isRunning: false,
@@ -20,11 +29,6 @@ const game = reactive({
   points: 0,
   key: ''
 });
-
-const setWordpacks = (content) => {
-  wordpacks.value = content;
-  setCurrentWp(content[0]);
-}
 
 const setCurrentWp = (pack) => {
   game.wordpack = pack;
@@ -43,14 +47,16 @@ const startGame = () => {
 }
 
 const attempt = () => {
-  fetch(`${settings.endpoint}/game/attempt/${currentUserInput.value.toLowerCase()}/${game.key}`)
-  .then(res => res.json())
-  .then(data => {
-    if (data.attempt === 'correct') game.scrambledWord = data.word;
-    currentUserInput.value = '';
-    game.points = data.points;
-    console.log(data);
-  });
+  if (currentUserInput.value.length == game.scrambledWord.length) {
+    fetch(`${settings.endpoint}/game/attempt/${currentUserInput.value.toLowerCase()}/${game.key}`)
+    .then(res => res.json())
+    .then(data => {
+      if (data.attempt === 'correct') game.scrambledWord = data.word;
+      currentUserInput.value = '';
+      game.points = data.points;
+      console.log(data);
+    });
+  }
 }
 
 const keyPressed = (key) => {
@@ -60,7 +66,9 @@ const keyPressed = (key) => {
 }
 
 const gameTimeout = () => {
-  console.log("test");
+  stats.lastPoints = game.points;
+  console.log("test", stats);
+  showStats.value = true;
 }
 
 </script>
@@ -69,15 +77,13 @@ const gameTimeout = () => {
 <div class="contentwrapper">
   <div v-show="!game.isRunning" class="before-game-starts">
     <LangSelector
-      :wordpacks="wordpacks"
       :current-wp="game.wordpack"
       @select-wordpack="setCurrentWp"
-      @update-wordpacks="setWordpacks"
     />
     <StartButton @start-pressed="startGame" />
   </div>
   <div v-show="game.isRunning" class="after-game-starts">
-    <div>
+    <div class="gameinfo">
       <Countdown :from="game.time" @timeout="gameTimeout" />
       <Scoreboard :points="game.points" />
     </div>
@@ -86,6 +92,7 @@ const gameTimeout = () => {
     <Keyboard @key-pressed="keyPressed" />
   </div>
 </div>
+  <Stats v-if="showStats" :stats="stats" />
 </template>
 
 <style lang="scss">
@@ -105,5 +112,14 @@ body {
   align-items: center;
   display: flex;
   flex-direction: column;
+}
+
+.gameinfo {
+  display: flex;
+  flex-direction: row;
+  
+  div {
+    margin: 0 16px;
+  }
 }
 </style>

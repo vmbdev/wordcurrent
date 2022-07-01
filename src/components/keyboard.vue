@@ -34,7 +34,7 @@ const thing = (event) => {
     <button class="key" name="key" value="ñ">Ñ</button>
   </div>
   <div class="keyboard__row">
-    <button class="key" name="key" value="enter">SEND</button>
+    <button class="key key__extra" name="key" value="enter">SEND</button>
     <button class="key" name="key" value="z">Z</button>
     <button class="key" name="key" value="x">X</button>
     <button class="key" name="key" value="c">C</button>
@@ -42,36 +42,39 @@ const thing = (event) => {
     <button class="key" name="key" value="b">B</button>
     <button class="key" name="key" value="n">N</button>
     <button class="key" name="key" value="m">M</button>
-    <button class="key" name="key" value="delete">&#x232B;</button>
+    <button class="key key__extra" name="key" value="delete">DEL</button>
   </div>
 </div>
 </template>
 
 <style lang="scss">
 .keyboard {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 8px;
+  margin: 8px 0;
 
   &__row {
+    display: flex;
+    flex-direction: row;
     padding: 3px;
+    width: 100%;
   }
-
 }
 .key {
-  min-width: 34px;
+  flex: 1;
   min-height: 34px;
   max-height: 34px;
   padding: 5px;
-  margin: 0 2px;
+  margin: 0 1px;
   font-size: 10pt;
   background-color: #51557E;
   color: white;
   border: 0;
 
-  &__enter {
-    font-size: 14pt;
+  &__extra {
+    flex: 2;
   }
 }
 </style>
