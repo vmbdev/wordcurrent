@@ -16,17 +16,28 @@ const props = defineProps({ caller: String });
 </template>
 
 <style lang="scss">
-$width: 500px;
+@use '../layout/media.scss' as m;
+
 .modal {
   background-color: white;
   border: 1px solid black;
   position: absolute;
   float: left;
   top: 20px;
-  left: calc(50% - calc($width / 2));
-  width: $width;
+  left: calc(50% - calc(500px / 2));
+  width: 500px;
   height: 300px;
   transition: all ease 1s;
+
+  @include m.media('mobile') {
+    width: 80%;
+    height: 70%;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
 
   &__content {
     padding: 25px;

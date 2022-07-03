@@ -9,6 +9,8 @@ const props = defineProps({
 </template>
 
 <style lang="scss">
+@use '../layout/media.scss' as m;
+
 .wordinput {
   height: 42px;
   width: 200px;
@@ -20,5 +22,12 @@ const props = defineProps({
   text-align: center;
   border-bottom: 3px solid black;
   margin: 16px 0;
+
+  &:after {
+    @include m.media('mobile') {
+      margin-bottom: 30px;
+      content:'';
+    }
+  }
 }
 </style>

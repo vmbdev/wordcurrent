@@ -26,7 +26,6 @@ const game = reactive({
   wordpack: '',
   scrambledWord: '',
   time: 0,
-  points: 0,
   key: ''
 });
 
@@ -41,8 +40,9 @@ const startGame = () => {
     game.scrambledWord = data.word;
     game.key = data.key;
     game.time = data.time;
-    game.points = 0;
     game.isRunning = true;
+    stats.lastPoints = 0;
+    stats.lastWords = 0;
   });
 }
 
@@ -51,9 +51,12 @@ const attempt = () => {
     fetch(`${settings.endpoint}/game/attempt/${currentUserInput.value.toLowerCase()}/${game.key}`)
     .then(res => res.json())
     .then(data => {
-      if (data.attempt === 'correct') game.scrambledWord = data.word;
+      if (data.attempt === 'correct') {
+        game.scrambledWord = data.word;
+        stats.lastPoints = data.points;
+        stats.lastWords++;
+      }
       currentUserInput.value = '';
-      game.points = data.points;
     });
   }
 }
@@ -65,7 +68,6 @@ const keyPressed = (key) => {
 }
 
 const gameTimeout = () => {
-  stats.lastPoints = game.points;
   showStats.value = true;
   game.isRunning = false;
 }
@@ -79,12 +81,18 @@ const gameTimeout = () => {
     <StartButton @start-pressed="startGame" />
   </div>
   <div v-show="game.isRunning" class="after-game-starts">
-    <div class="gameinfo">
-      <Countdown :from="game.time" @timeout="gameTimeout" :gameIsRunning="game.isRunning" />
-      <Scoreboard :points="game.points" />
+    <div class="gamecontent">
+      <div class="gameinfo">
+        <Countdown
+          :from="game.time"
+          :gameIsRunning="game.isRunning"
+          @timeout="gameTimeout"
+        />
+        <Scoreboard :points="stats.lastPoints" />
+      </div>
+      <ScrambledWord :word="game.scrambledWord" />
+      <WordInput :word="currentUserInput" />
     </div>
-    <ScrambledWord :word="game.scrambledWord" />
-    <WordInput :word="currentUserInput" />
     <Keyboard @key-pressed="keyPressed" />
   </div>
 </div>
@@ -96,30 +104,78 @@ const gameTimeout = () => {
 </template>
 
 <style lang="scss">
+@use './layout/media.scss' as m;
+
 body {
+  @include m.media('mobile') {
+    margin: 0;
+    padding: 0;
+  }
   font-family: 'Mulish', sans-serif;
+}
+
+.app {
+  @include m.media('mobile') {
+    height: 100vh;
+  }
 }
 
 .contentwrapper {
   border: 1px solid black;
   margin-left: auto;
   margin-right: auto;
+  padding: 30px 0;
   width: 450px;
-  padding: 30px 20px;
+
+  @include m.media('mobile') {
+    border: 0;
+    height: 100%;
+    padding: 0;
+    width: 100%;
+  }
 }
 
-.before-game-starts, .after-game-starts {
+.before-game-starts {
   align-items: center;
   display: flex;
   flex-direction: column;
+
+  @include m.media('mobile') {
+    height: 100%;
+    justify-content: center;
+  }
 }
 
-.gameinfo {
+.after-game-starts {
   display: flex;
-  flex-direction: row;
-  
-  div {
-    margin: 0 16px;
+  flex-direction: column;
+
+  @include m.media('mobile') {
+    height: 100%;
+  }
+
+  .gamecontent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include m.media('mobile') {
+      margin-top: 15px;
+      flex: 5;
+    }
+  }
+
+  .gameinfo {
+    display: flex;
+    flex-direction: row;
+
+    @include m.media('mobile') {
+      margin-bottom: 15rem;
+    }
+    
+    div {
+      margin: 0 16px;
+    }
   }
 }
 </style>

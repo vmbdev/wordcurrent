@@ -48,6 +48,7 @@ const thing = (event) => {
 </template>
 
 <style lang="scss">
+
 .keyboard {
   width: 100%;
   display: flex;
@@ -58,7 +59,7 @@ const thing = (event) => {
   &__row {
     display: flex;
     flex-direction: row;
-    padding: 3px;
+    margin: 3px;
     width: 100%;
   }
 }
