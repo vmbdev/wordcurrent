@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive } from 'vue';
+import { onMounted, ref, reactive } from 'vue';
 import LangSelector from './components/langselector.vue';
 import StartButton from './components/startbutton.vue';
 import ScrambledWord from './components/scrambledword.vue';
@@ -29,9 +29,15 @@ const game = reactive({
   key: ''
 });
 
-const setCurrentWp = (pack) => {
-  game.wordpack = pack;
-}
+onMounted(() => {
+  const storedStats = JSON.parse(localStorage.getItem('stats'));
+  if (storedStats) {
+    stats.bestWords = storedStats.bestWords;
+    stats.bestPoints = storedStats.bestPoints;
+    stats.totalWords = storedStats.totalWords;
+    stats.totalPoints = storedStats.totalPoints;
+  }
+});
 
 const startGame = () => {
   fetch(`${settings.endpoint}/game/start/${game.wordpack}`)
@@ -70,19 +76,35 @@ const keyPressed = (key) => {
 const gameTimeout = () => {
   showStats.value = true;
   game.isRunning = false;
-}
 
+  if ((stats.lastPoints > stats.bestPoints) && (stats.lastWords > stats.bestWords)) {
+     stats.bestPoints = stats.lastPoints;
+     stats.bestWords = stats.lastWords;
+  }
+  stats.totalWords += stats.lastWords;
+  stats.totalPoints += stats.lastPoints;
+
+  localStorage.setItem('stats', JSON.stringify({
+    bestPoints: stats.bestPoints,
+    bestWords: stats.bestWords,
+    totalPoints: stats.totalPoints,
+    totalWords: stats.totalWords
+  }));
+}
 </script>
 
 <template>
-<div class="contentwrapper">
-  <div v-show="!game.isRunning" class="before-game-starts">
-    <LangSelector :current-wp="game.wordpack" @select-wordpack="setCurrentWp" />
+<div class="game">
+  <div v-show="!game.isRunning" class="game__menu">
+    <LangSelector
+      :current-wp="game.wordpack"
+      @select-wordpack="(pack) => { game.wordpack = pack; }"
+    />
     <StartButton @start-pressed="startGame" />
   </div>
-  <div v-show="game.isRunning" class="after-game-starts">
-    <div class="gamecontent">
-      <div class="gameinfo">
+  <div v-show="game.isRunning" class="game__running">
+    <div class="game__content">
+      <div class="game__info">
         <Countdown
           :from="game.time"
           :gameIsRunning="game.isRunning"
@@ -120,7 +142,7 @@ body {
   }
 }
 
-.contentwrapper {
+.game {
   border: 1px solid black;
   margin-left: auto;
   margin-right: auto;
@@ -129,32 +151,32 @@ body {
 
   @include m.media('mobile') {
     border: 0;
-    height: 100%;
     padding: 0;
+    height: 100%;
     width: 100%;
   }
-}
 
-.before-game-starts {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
+  &__menu {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
 
-  @include m.media('mobile') {
-    height: 100%;
-    justify-content: center;
-  }
-}
-
-.after-game-starts {
-  display: flex;
-  flex-direction: column;
-
-  @include m.media('mobile') {
-    height: 100%;
+    @include m.media('mobile') {
+      height: 100%;
+      justify-content: center;
+    }
   }
 
-  .gamecontent {
+  &__running {
+    display: flex;
+    flex-direction: column;
+
+    @include m.media('mobile') {
+      height: 100%;
+    }
+  }
+
+  &__content {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -165,7 +187,7 @@ body {
     }
   }
 
-  .gameinfo {
+  &__info {
     display: flex;
     flex-direction: row;
 
@@ -178,4 +200,5 @@ body {
     }
   }
 }
+
 </style>

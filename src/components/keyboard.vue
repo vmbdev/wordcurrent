@@ -62,20 +62,21 @@ const thing = (event) => {
     margin: 3px;
     width: 100%;
   }
-}
-.key {
-  flex: 1;
-  min-height: 34px;
-  max-height: 34px;
-  padding: 5px;
-  margin: 0 1px;
-  font-size: 10pt;
-  background-color: #51557E;
-  color: white;
-  border: 0;
 
-  &__extra {
-    flex: 2;
+  .key {
+    flex: 1;
+    min-height: 60px;
+    padding: 5px;
+    margin: 0 1px;
+    font-size: 10pt;
+    background-color: #51557E;
+    color: white;
+    border: 0;
+
+    &__extra {
+      flex: 2;
+      background-color: #06283D;
+    }
   }
 }
 </style>

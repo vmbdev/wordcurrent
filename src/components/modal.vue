@@ -40,7 +40,7 @@ const props = defineProps({ caller: String });
   }
 
   &__content {
-    padding: 25px;
+    height: 100%;
   }
 }
 </style>
