@@ -1,0 +1,32 @@
+{
+  "startbutton": {
+    "text": "Start"
+  },
+  "countdown": {
+    "timeleft": "Time left: {time}s"
+  },
+  "keyboard": {
+    "send": "SEND",
+    "delete": "DEL"
+  },
+  "scoreboard": {
+    "points": "Points: {points}"
+  },
+  "socialshare": {
+    "share": "Share it with your friends",
+    "tryit": "Try it on {url}"
+  },
+  "stats": {
+    "msg": "I just did {points} points with {words} words at Word Current!",
+    "scorepoints": "You scored {points} points!",
+    "scorewords": "From the {words} words you figured out.",
+    "best": "Your best run was {points} points with {words} words.",
+    "total": "In total, you got {words} words right for a total of {points} points."
+  },
+  "wpselector": {
+    "choose": "Choose the language for the dictionary:"
+  },
+  "langselector": {
+    "choose": "Choose the language for the interface:"
+  }
+}

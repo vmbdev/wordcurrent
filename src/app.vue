@@ -1,5 +1,6 @@
 <script setup>
 import { onMounted, ref, reactive } from 'vue';
+import WpSelector from './components/wpselector.vue';
 import LangSelector from './components/langselector.vue';
 import StartButton from './components/startbutton.vue';
 import ScrambledWord from './components/scrambledword.vue';
@@ -96,7 +97,8 @@ const gameTimeout = () => {
 <template>
 <div class="game">
   <div v-show="!game.isRunning" class="game__menu">
-    <LangSelector
+    <LangSelector />
+    <WpSelector
       :current-wp="game.wordpack"
       @select-wordpack="(pack) => { game.wordpack = pack; }"
     />

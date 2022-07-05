@@ -1,0 +1,32 @@
+{
+  "startbutton": {
+    "text": "Iniciar"
+  },
+  "countdown": {
+    "timeleft": "Tiempo restante: {time}s"
+  },
+  "keyboard": {
+    "send": "ENVIAR",
+    "delete": "BORRAR"
+  },
+  "scoreboard": {
+    "points": "Puntos: {points}"
+  },
+  "socialshare": {
+    "share": "Enséñaselo a tus amigos",
+    "tryit": "Pruébalo en {url}"
+  },
+  "stats": {
+    "msg": "Acabo de conseguir {points} puntos con {words} palabras en Word Current!",
+    "scorepoints": "Has logrado {points} puntos!",
+    "scorewords": "De las {words} palabras que has descubierto.",
+    "best": "Tu mejor partida fueron {points} puntos con {words} palabras.",
+    "total": "En total, has descubierto {words} palabras con un total de {points} puntos."
+  },
+  "wpselector": {
+    "choose": "Elige el idioma del diccionario:"
+  },
+  "langselector": {
+    "choose": "Elige el idioma de la interfaz:"
+  }
+}

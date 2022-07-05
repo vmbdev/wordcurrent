@@ -27,9 +27,13 @@ const componentForNetwork = (network) => {
 
 <template>
 <div class="socialshare">
-  <div class="socialshare__title">Share it with your friends</div>
+  <div class="socialshare__title">{{ $t('socialshare.share') }}</div>
   <div class="socialshare__networks">
-    <component v-for="network in props.networks" :is="componentForNetwork(network)" :msg="props.msg" />
+    <component
+      v-for="network in props.networks"
+      :is="componentForNetwork(network)"
+      :msg="props.msg"
+    />
   </div>
 </div>
 </template>
@@ -41,6 +45,7 @@ const componentForNetwork = (network) => {
   &__title {
     font-size: 16pt;
     font-weight: 700;
+    text-align: center;
   }
 
   &__networks {
@@ -48,6 +53,11 @@ const componentForNetwork = (network) => {
     flex-direction: row;
     justify-content: center;
     gap: 20px;
+  }
+
+  &__icon {
+    width: 60px;
+    height: 60px;
   }
 }
 </style>

@@ -77,7 +77,6 @@ const getWordpacks = async () => {
 const status = async (req, reply) => {
   const { key } = req.params;
   const query = await knex('games').select('time', 'points', 'timestamp').where({ key }).first();
-  console.log(query);
   const time = query.time - (~~(Date.now() / 1000) - query.timestamp);
 
   return { time: time > 0 ? time : 0, points: query.points };

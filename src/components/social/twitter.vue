@@ -1,4 +1,6 @@
 <script setup>
+import icon from '../../assets/social/bxl-twitter.svg';
+
 const props = defineProps({ msg: String });
 
 const getUrl = () => {
@@ -9,7 +11,7 @@ const getUrl = () => {
 <template>
 <div>
   <a :href="getUrl()" target="_blank">
-    Twitter
+    <img :src="icon" class="socialshare__icon" alt="Twitter" />
   </a>
 </div>
 </template>

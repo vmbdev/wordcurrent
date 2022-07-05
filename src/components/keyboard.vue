@@ -34,7 +34,7 @@ const thing = (event) => {
     <button class="key" name="key" value="ñ">Ñ</button>
   </div>
   <div class="keyboard__row">
-    <button class="key key__extra" name="key" value="enter">SEND</button>
+    <button class="key key__extra" name="key" value="enter">{{ $t('keyboard.send') }}</button>
     <button class="key" name="key" value="z">Z</button>
     <button class="key" name="key" value="x">X</button>
     <button class="key" name="key" value="c">C</button>
@@ -42,7 +42,7 @@ const thing = (event) => {
     <button class="key" name="key" value="b">B</button>
     <button class="key" name="key" value="n">N</button>
     <button class="key" name="key" value="m">M</button>
-    <button class="key key__extra" name="key" value="delete">DEL</button>
+    <button class="key key__extra" name="key" value="delete">{{ $t('keyboard.delete') }}</button>
   </div>
 </div>
 </template>

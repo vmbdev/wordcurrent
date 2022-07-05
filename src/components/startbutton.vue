@@ -1,14 +1,10 @@
 <script setup>
-
 const emit = defineEmits(['startPressed']);
 </script>
 
 <template>
-<button
-  class="startbutton"
-  @click="() => { emit('startPressed') }"
->
-  Start
+<button class="startbutton" @click="() => { emit('startPressed') }">
+  {{ $t("startbutton.text") }}
 </button>
 </template>
 

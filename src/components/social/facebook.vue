@@ -1,4 +1,6 @@
 <script setup>
+import icon from '../../assets/social/bxl-facebook.svg';
+
 const props = defineProps({ msg: String });
 
 const getUrl = () => {
@@ -9,7 +11,7 @@ const getUrl = () => {
 <template>
 <div>
   <a :href="getUrl()" target="_blank">
-    Facebook
+    <img :src="icon" class="socialshare__icon" alt="Facebook"/>
   </a>
 </div>
 </template>

@@ -13,19 +13,20 @@
   "dependencies": {
     "@fastify/cors": "^8.0.0",
     "@fastify/static": "^6.4.0",
-    "fastify": "^4.0.3",
+    "fastify": "^4.2.0",
     "knex": "^2.1.0",
     "nanoid": "^4.0.0",
     "pg": "^8.7.3",
-    "sass": "^1.52.3",
-    "sass-loader": "^13.0.0",
-    "vue": "^3.2.36"
+    "sass": "^1.53.0",
+    "sass-loader": "^13.0.2",
+    "vue": "^3.2.37",
+    "vue-i18n": "^9.1.10"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.3",
-    "eslint": "^8.5.0",
-    "eslint-plugin-vue": "^9.0.0",
+    "eslint": "^8.19.0",
+    "eslint-plugin-vue": "^9.1.1",
     "nodemon": "^2.0.18",
-    "vite": "^2.9.9"
+    "vite": "^2.9.13"
   }
 }

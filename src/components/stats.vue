@@ -8,14 +8,14 @@ const props = defineProps({ stats: Object });
 <template>
 <Modal caller="stats">
   <div class="stats">
-    <div class="stats__lastpoints">You scored <strong>{{ props.stats.lastPoints }}</strong> points!</div>
-    <div class="stats__lastwords">From the <strong>{{ props.stats.lastWords }}</strong> words you figured out.</div>
+    <div class="stats__lastpoints">{{ $t('stats.scorepoints', { points: props.stats.lastPoints }) }}</div>
+    <div class="stats__lastwords">{{ $t('stats.scorewords', { words: props.stats.lastWords }) }}</div>
     <div class="stats__history">
-      Your best run was <strong>{{ props.stats.bestPoints }}</strong> points with <strong>{{ props.stats.bestWords }}</strong> words.
-      In total, you got <strong>{{ props.stats.totalWords }}</strong> words right for a total of <strong>{{ props.stats.totalPoints }}</strong> points.
+      {{ $t('stats.best', { points: props.stats.bestPoints, words: props.stats.bestWords })}}
+      {{ $t('stats.total', { points: props.stats.totalPoints, words: props.stats.totalWords })}}
     </div>
     <SocialShare
-      :msg="`I just did ${props.stats.lastPoints} points with ${props.stats.lastWords } words at Word Current!`"
+      :msg="$t('stats.msg', { points: props.stats.lastPoints, words: props.stats.lastWords })"
       :networks="['whatsapp', 'twitter', 'facebook']"
       />
   </div>

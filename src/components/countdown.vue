@@ -26,7 +26,7 @@ watch(
 </script>
 
 <template>
-<div>Time left: {{ timeLeft }}s</div>
+<div>{{ $t('countdown.timeleft', { time: timeLeft }) }}</div>
 </template>
 
 <style lang="scss">
