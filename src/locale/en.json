@@ -27,6 +27,7 @@
     "choose": "Choose the language for the dictionary:"
   },
   "langselector": {
-    "choose": "Choose the language for the interface:"
+    "choose": "Choose the language for the interface:",
+    "interface": "Interface in:"
   }
 }

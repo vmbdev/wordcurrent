@@ -27,6 +27,7 @@
     "choose": "Elige el idioma del diccionario:"
   },
   "langselector": {
-    "choose": "Elige el idioma de la interfaz:"
+    "choose": "Elige el idioma de la interfaz:",
+    "interface": "Interfaz en:"
   }
 }

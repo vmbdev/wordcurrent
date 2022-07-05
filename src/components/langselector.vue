@@ -7,16 +7,23 @@ const i18n = useI18n({});
 
 onBeforeMount(() => {
   const storedLocale = localStorage.getItem('locale');
-  if (storedLocale && settings.langs.includes(storedLocale)) i18n.locale.value = storedLocale;
-  else if (settings.langs.includes(navigator.language)) i18n.locale.value = navigator.language;
+  if (storedLocale && settings.langs.includes(storedLocale)) changeLocale(storedLocale);
+  else if (settings.langs.includes(navigator.language)) changeLocale(navigator.language);
   else {
     const shortLocale = navigator.language.slice(0,2);
-    if (settings.langs.includes(shortLocale)) i18n.locale.value = shortLocale;
+    if (settings.langs.includes(shortLocale)) changeLocale(shortLocale);
   }
 });
 
-const storeLocale = (e) => {
-  localStorage.setItem('locale', e.target.value);
+const changeLocale = async (newLocale) => {
+  if (settings.langs.includes(newLocale)) {
+    if (!i18n.availableLocales.includes(newLocale)) {
+      const { default: messages } = await import(`../locale/${newLocale}.json`);
+      i18n.setLocaleMessage(newLocale, messages);
+    }
+  i18n.locale.value = newLocale;
+  localStorage.setItem('locale', newLocale);
+  }
 }
 
 const getLocaleDisplayName = (locale) => {
@@ -30,14 +37,14 @@ const getLocaleDisplayName = (locale) => {
 
 <template>
 <div class="langselector">
-  <div>Interface in: </div>
+  <div>{{ $t('langselector.interface') }}</div>
   <div>
-  <select v-model="$i18n.locale" @change="storeLocale" class="langselector__select">
+  <select @change="changeLocale($event.target.value)" class="langselector__select">
     <option 
-      v-for="locale in $i18n.availableLocales"
+      v-for="locale in settings.langs"
       :key="`locale-${locale}`"
       :value="locale"
-      :selected="i18n.locale === locale"
+      :selected="$i18n.locale === locale"
     >
     {{ getLocaleDisplayName(locale) }}
     </option>
