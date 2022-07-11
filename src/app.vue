@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref, reactive } from 'vue';
+import { onBeforeMount, ref, reactive } from 'vue';
 import WpSelector from './components/wpselector.vue';
 import LangSelector from './components/langselector.vue';
 import StartButton from './components/startbutton.vue';
@@ -9,6 +9,7 @@ import Keyboard from './components/keyboard.vue';
 import Countdown from './components/countdown.vue';
 import Scoreboard from './components/scoreboard.vue';
 import Stats from './components/stats.vue';
+import PrivacyManager from './components/privacymanager.vue';
 import settings from './settings.js';
 
 const currentUserInput = ref('');
@@ -30,8 +31,8 @@ const game = reactive({
   key: ''
 });
 
-onMounted(() => {
-  const storedStats = JSON.parse(localStorage.getItem('stats'));
+onBeforeMount(() => {
+  const storedStats = JSON.parse(localStorage.getItem('WC_stats'));
   if (storedStats) {
     stats.bestWords = storedStats.bestWords;
     stats.bestPoints = storedStats.bestPoints;
@@ -85,13 +86,14 @@ const gameTimeout = () => {
   stats.totalWords += stats.lastWords;
   stats.totalPoints += stats.lastPoints;
 
-  localStorage.setItem('stats', JSON.stringify({
+  localStorage.setItem('WC_stats', JSON.stringify({
     bestPoints: stats.bestPoints,
     bestWords: stats.bestWords,
     totalPoints: stats.totalPoints,
     totalWords: stats.totalWords
   }));
 }
+
 </script>
 
 <template>
@@ -120,17 +122,19 @@ const gameTimeout = () => {
     <Keyboard @key-pressed="keyPressed" />
   </div>
 </div>
-  <Stats
-    v-if="showStats"
-    :stats="stats"
-    @close="() => { showStats = false }"
-  />
+<Stats
+  v-if="showStats"
+  :stats="stats"
+  @close="() => { showStats = false }"
+/>
+<!-- <PrivacyManager /> -->
 </template>
 
 <style lang="scss">
 @use './layout/media.scss' as m;
 
 body {
+  background-color: black;
   @include m.media('mobile') {
     margin: 0;
     padding: 0;
@@ -145,6 +149,7 @@ body {
 }
 
 .game {
+  background-color: white;
   border: 1px solid black;
   margin-left: auto;
   margin-right: auto;

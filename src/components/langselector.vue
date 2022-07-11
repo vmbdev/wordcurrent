@@ -6,7 +6,7 @@ import settings from '../settings.js';
 const i18n = useI18n({});
 
 onBeforeMount(() => {
-  const storedLocale = localStorage.getItem('locale');
+  const storedLocale = localStorage.getItem('WC_locale');
   if (storedLocale && settings.langs.includes(storedLocale)) changeLocale(storedLocale);
   else if (settings.langs.includes(navigator.language)) changeLocale(navigator.language);
   else {
@@ -22,7 +22,7 @@ const changeLocale = async (newLocale) => {
       i18n.setLocaleMessage(newLocale, messages);
     }
   i18n.locale.value = newLocale;
-  localStorage.setItem('locale', newLocale);
+  localStorage.setItem('WC_locale', newLocale);
   }
 }
 

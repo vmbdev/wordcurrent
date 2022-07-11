@@ -29,5 +29,8 @@
   "langselector": {
     "choose": "Choose the language for the interface:",
     "interface": "Interface in:"
+  },
+  "gdpr": {
+    "msg": "Word Current stores your scores in your browser, and some optional traffic stats are also stored in our own servers. No information is ever transmitted to third parties."
   }
 }

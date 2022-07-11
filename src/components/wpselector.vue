@@ -12,14 +12,14 @@ onMounted(() => {
   .then((data) => { 
     wordpacks.value = data.wordpacks;
 
-    const storedWordpack = localStorage.getItem('wordpack');
+    const storedWordpack = localStorage.getItem('WC_wordpack');
     if (storedWordpack && wordpacks.value.includes(storedWordpack)) emit('selectWordpack', storedWordpack);
     else emit('selectWordpack', wordpacks.value[0]);
   });
 });
 
 const selectWordpack = (pack) => {
-  localStorage.setItem('wordpack', pack);
+  localStorage.setItem('WC_wordpack', pack);
   emit('selectWordpack', pack)
 }
 

@@ -2,7 +2,9 @@
 import CloseButton from './closebutton.vue';
 
 const emit = defineEmits(['close']);
-const props = defineProps({ caller: String });
+const props = defineProps({
+  caller: String
+});
 
 </script>
 
