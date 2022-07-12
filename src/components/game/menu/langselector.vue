@@ -1,7 +1,7 @@
 <script setup>
 import { onBeforeMount } from 'vue';
 import { useI18n } from 'vue-i18n';
-import settings from '../settings.js';
+import settings from '../../../settings.js';
 
 const i18n = useI18n({});
 
@@ -18,7 +18,7 @@ onBeforeMount(() => {
 const changeLocale = async (newLocale) => {
   if (settings.langs.includes(newLocale)) {
     if (!i18n.availableLocales.includes(newLocale)) {
-      const { default: messages } = await import(`../locale/${newLocale}.json`);
+      const { default: messages } = await import(`../../../locale/${newLocale}.json`);
       i18n.setLocaleMessage(newLocale, messages);
     }
   i18n.locale.value = newLocale;

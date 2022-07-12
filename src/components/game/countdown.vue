@@ -3,12 +3,12 @@ import { ref, watch } from 'vue';
 const emit = defineEmits(['timeout']);
 const props = defineProps({
   from: Number,
-  gameIsRunning: Boolean
+  isGameRunning: Boolean
 })
 const timeLeft = ref();
 
 watch(
-  () => props.gameIsRunning,
+  () => props.isGameRunning,
   async (newVal) => {
     if (newVal) {
       timeLeft.value = props.from;

@@ -1,10 +1,10 @@
 <script setup>
-import { onMounted, ref } from 'vue';
-import settings from '../settings.js';
+import { onMounted, ref, watch } from 'vue';
+import settings from '../../../settings.js';
 
 const emit = defineEmits(['selectWordpack']);
-const props = defineProps({ currentWp: String });
 const wordpacks = ref([]);
+const currentWordpack = ref();
 
 onMounted(() => {
   fetch(`${settings.endpoint}/game/wordpacks`)
@@ -13,14 +13,17 @@ onMounted(() => {
     wordpacks.value = data.wordpacks;
 
     const storedWordpack = localStorage.getItem('WC_wordpack');
-    if (storedWordpack && wordpacks.value.includes(storedWordpack)) emit('selectWordpack', storedWordpack);
-    else emit('selectWordpack', wordpacks.value[0]);
+    if (storedWordpack && wordpacks.value.includes(storedWordpack)) currentWordpack.value = storedWordpack;
+    else currentWordpack.value = wordpacks.value[0];
+
   });
 });
 
+watch(currentWordpack, (newCurrentWp) => { emit('selectWordpack', newCurrentWp); });
+
 const selectWordpack = (pack) => {
   localStorage.setItem('WC_wordpack', pack);
-  emit('selectWordpack', pack)
+  currentWordpack.value = pack;
 }
 
 </script>
@@ -32,7 +35,7 @@ const selectWordpack = (pack) => {
     <div
       class="wpselector__item"
       v-for="pack in wordpacks"
-      :class="{ 'wpselector__item--active': pack === props.currentWp }"
+      :class="{ 'wpselector__item--active': pack === currentWordpack }"
       @click="() => { selectWordpack(pack) }"
     >
       {{ pack.slice(0,1).toUpperCase() + pack.slice(1) }}

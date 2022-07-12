@@ -9,7 +9,7 @@ const props = defineProps({
 </template>
 
 <style lang="scss">
-@use '../layout/media.scss' as m;
+@use '../../layout/media.scss' as m;
 
 .wordinput {
   height: 42px;
