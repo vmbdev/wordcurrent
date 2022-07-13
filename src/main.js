@@ -4,7 +4,8 @@ import settings from './settings.js';
 import App from './app.vue';
 
 const defaultLocale = settings.langs[0];
-import(`./locale/${defaultLocale}.json`).then(({ default: messages }) => {
+import(`./locale/${defaultLocale}.json`)
+.then(({ default: messages }) => {
   const i18n = createI18n({
     locale: defaultLocale,
     messages: { [defaultLocale]: messages }
@@ -14,3 +15,6 @@ import(`./locale/${defaultLocale}.json`).then(({ default: messages }) => {
   app.use(i18n);
   app.mount('#app');
 })
+.catch((err) =>
+  console.error(err.message)
+)

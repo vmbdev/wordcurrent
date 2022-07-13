@@ -3,9 +3,9 @@ import { ref } from 'vue';
 import Game from './components/game/game.vue';
 import GameMenu from './components/game/menu/menu.vue';
 import StatsResults from './components/statsresults.vue';
-// import PrivacyManager from './components/privacymanager.vue';
+import PrivacyManager from './components/privacymanager.vue';
 
-const currentWordpack = ref();
+const currentWordpack = ref('');
 const isGameRunning = ref(false);
 const startNewGame = ref(false);
 const showStats = ref(false);
@@ -47,7 +47,7 @@ const gameTimeout = (stats) => {
   :stats="currentStats"
   @close="() => { showStats = false }"
 />
-<!-- <PrivacyManager /> -->
+<PrivacyManager />
 </template>
 
 <style lang="scss">
@@ -83,5 +83,4 @@ body {
     width: 100%;
   }
 }
-
 </style>

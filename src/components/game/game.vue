@@ -8,12 +8,11 @@ import Scoreboard from './scoreboard.vue';
 import Stats from '../../helpers/stats.js';
 import settings from '../../settings.js';
 
+const emit = defineEmits(['gameStart', 'gameTimeout']);
 const props = defineProps({
   wordpack: String,
   startNewGame: Boolean
 });
-
-const emit = defineEmits(['gameStart', 'gameTimeout']);
 
 const stats = reactive(new Stats());
 const currentUserInput = ref('');
@@ -22,7 +21,8 @@ const game = reactive({
   wordpack: '',
   scrambledWord: '',
   time: 0,
-  key: ''
+  key: '',
+  lastMistake: 0
 });
 
 onBeforeMount(() => {
@@ -67,6 +67,7 @@ const attempt = () => {
         stats.lastPoints = data.points;
         stats.lastWords++;
       }
+      else game.lastMistake = Date.now();
       currentUserInput.value = '';
     });
   }
@@ -105,7 +106,7 @@ const gameTimeout = () => {
         />
         <Scoreboard :points="stats.lastPoints" />
       </div>
-      <ScrambledWord :word="game.scrambledWord" />
+      <ScrambledWord :word="game.scrambledWord" :last-mistake="game.lastMistake" />
       <WordInput :word="currentUserInput" />
     </div>
     <Keyboard @key-pressed="keyPressed" />

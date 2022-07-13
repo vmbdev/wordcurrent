@@ -23,27 +23,27 @@ const props = defineProps({ stats: Object });
 </template>
 
 <style lang="scss">
-  .stats {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 0 25px;
+.stats {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 25px;
 
-    &__lastpoints {
-      font-size: 24pt;
-      font-weight: 700;
-      text-align: center;
-    }
-
-    &__lastwords {
-      font-size: 14pt;
-    }
-
-    &__history {
-      padding-top: 30px;
-    }
-
+  &__lastpoints {
+    font-size: 24pt;
+    font-weight: 700;
+    text-align: center;
   }
+
+  &__lastwords {
+    font-size: 14pt;
+  }
+
+  &__history {
+    padding-top: 30px;
+  }
+
+}
 </style>

@@ -1,39 +1,25 @@
 <script setup>
-import Twitter from './social/twitter.vue';
-import Facebook from './social/facebook.vue';
-import WhatsApp from './social/whatsapp.vue';
+import { onMounted, shallowReactive } from 'vue';
 
 const props = defineProps({
   msg: String,
   networks: Array
 });
+const networkComponents = shallowReactive([]);
 
-const componentForNetwork = (network) => {
-  let component;
-  switch(network) {
-    case 'twitter':
-      component = Twitter;
-      break;
-    case 'facebook':
-      component = Facebook;
-      break;
-    case 'whatsapp':
-      component = WhatsApp;
-      break;
+onMounted(async () => {
+  for (const network of props.networks) {
+    const { default: component } = await import(`./social/${network}.vue`);
+    networkComponents.push(component);
   }
-  return component;
-}
+});
 </script>
 
 <template>
 <div class="socialshare">
   <div class="socialshare__title">{{ $t('socialshare.share') }}</div>
   <div class="socialshare__networks">
-    <component
-      v-for="network in props.networks"
-      :is="componentForNetwork(network)"
-      :msg="props.msg"
-    />
+    <component v-for="network in networkComponents" :is="network" :msg="props.msg" />
   </div>
 </div>
 </template>
