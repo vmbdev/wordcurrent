@@ -1,9 +1,9 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, provide } from 'vue';
 import Game from './components/game/game.vue';
-import GameMenu from './components/game/menu/menu.vue';
 import StatsResults from './components/statsresults.vue';
-import PrivacyManager from './components/privacymanager.vue';
+// import PrivacyManager from './components/privacymanager.vue';
+import SelectionScreen from './components/selectionscreen/selectionscreen.vue';
 
 const currentWordpack = ref('');
 const isGameRunning = ref(false);
@@ -11,9 +11,11 @@ const startNewGame = ref(false);
 const showStats = ref(false);
 const currentStats = ref();
 
-const startPressed = () => {
-  startNewGame.value = true;
-}
+// avoiding huge event drilling
+const startPressed = () => { startNewGame.value = true; }
+const selectWordpack = (pack) => { currentWordpack.value = pack; }
+provide('selectWordpack', selectWordpack);
+provide('startPressed', startPressed);
 
 const gameStarted = () => {
   isGameRunning.value = true;
@@ -29,11 +31,7 @@ const gameTimeout = (stats) => {
 
 <template>
 <div class="container">
-  <GameMenu
-    v-show="!isGameRunning"
-    @select-wordpack="(pack) => { currentWordpack = pack; }"
-    @start-pressed="startPressed"
-  />
+  <SelectionScreen v-if="!isGameRunning" />
   <Game
     v-show="isGameRunning"
     :wordpack="currentWordpack"
@@ -47,7 +45,7 @@ const gameTimeout = (stats) => {
   :stats="currentStats"
   @close="() => { showStats = false }"
 />
-<PrivacyManager />
+<!-- <PrivacyManager /> -->
 </template>
 
 <style lang="scss">
@@ -73,7 +71,7 @@ body {
   border: 1px solid black;
   margin-left: auto;
   margin-right: auto;
-  padding: 30px 0;
+  padding: 0 0 30px 0;
   width: 450px;
 
   @include m.media('mobile') {

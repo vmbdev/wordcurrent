@@ -119,8 +119,10 @@ const gameTimeout = () => {
 .game {
   display: flex;
   flex-direction: column;
+  padding-top: 30px;
 
   @include m.media('mobile') {
+    padding-top: 0;
     height: 100%;
   }
 

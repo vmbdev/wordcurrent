@@ -29,5 +29,11 @@
   "langselector": {
     "choose": "Elige el idioma de la interfaz:",
     "interface": "Interfaz en:"
+  },
+  "gdpr": {
+    "msg": "Word Current stores your scores in your browser, and some optional traffic stats are also stored in our own servers. No information is ever transmitted to third parties."
+  },
+  "footer": {
+    "msg": "© 2022 Word Current · Código fuente en {0}"
   }
 }

@@ -1,10 +1,11 @@
 <script setup>
-import { onMounted, ref, watch } from 'vue';
-import settings from '../../../settings.js';
+import { onMounted, ref, watch, inject } from 'vue';
+import settings from '../../settings.js';
 
 const emit = defineEmits(['selectWordpack']);
 const wordpacks = ref([]);
 const currentWordpack = ref();
+const parentSelectWordpack = inject('selectWordpack');
 
 onMounted(() => {
   fetch(`${settings.endpoint}/game/wordpacks`)
@@ -19,13 +20,13 @@ onMounted(() => {
   });
 });
 
-watch(currentWordpack, (newCurrentWp) => { emit('selectWordpack', newCurrentWp); });
-
 const selectWordpack = (pack) => {
   localStorage.setItem('WC_wordpack', pack);
   currentWordpack.value = pack;
 }
 
+// reduce amount of parent calls as WP can be loaded by user or by localstorage.getItem
+watch(currentWordpack, (newCurrentWp) => { parentSelectWordpack(newCurrentWp); });
 </script>
 
 <template>

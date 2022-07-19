@@ -1,9 +1,11 @@
 <script setup>
-const emit = defineEmits(['startPressed']);
+import { inject } from 'vue';
+
+const startPressed = inject('startPressed')
 </script>
 
 <template>
-<button class="startbutton" @click="() => { emit('startPressed') }">
+<button class="startbutton" @click="() => { startPressed() }">
   {{ $t("startbutton.text") }}
 </button>
 </template>
