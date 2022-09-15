@@ -17,7 +17,7 @@ class WordList {
   }
 
    loadWordList(pack) {
-    const rl = readline.createInterface({ input: fs.createReadStream(`./api/wordlists/${pack}.l`) });
+    const rl = readline.createInterface({ input: fs.createReadStream(`./api/wordlists/${pack}`) });
     this._packs[pack] = {};
 
     for (const level of this._levels) this._packs[pack][level] = [];
