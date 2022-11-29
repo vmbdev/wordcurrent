@@ -3,45 +3,48 @@ import fs from 'fs';
 
 class WordList {
   constructor(options) {
-    this._availableWordpacks = options.wordpacks;
-    this._flow = options.flow;
-    this._levels = Object.keys(this._flow).map(i => Number.parseInt(i));
+    this.availableWordpacks = options.wordpacks;
+    this.flow = options.flow;
+    this.levels = Object.keys(this.flow).map(i => Number.parseInt(i));
   }
 
   load() {
-    this._packs = {};
+    this.packs = {};
 
-    for (const pack of this._availableWordpacks) {
+    for (const pack of this.availableWordpacks) {
       this.loadWordList(pack);
     }
   }
 
    loadWordList(pack) {
     const rl = readline.createInterface({ input: fs.createReadStream(`./api/wordlists/${pack}`) });
-    this._packs[pack] = {};
+    this.packs[pack] = {};
 
-    for (const level of this._levels) this._packs[pack][level] = [];
+    for (const level of this.levels) {
+      this.packs[pack][level] = [];
+    }
 
     rl.on('line', (line) => {
-      if (this._levels.includes(line.length)) this._packs[pack][line.length].push(line);
+      if (this.levels.includes(line.length)) this.packs[pack][line.length].push(line);
     })
   }
 
   generateSet(language) {
     const wordSet = {};
-    for (const level of this._levels)
-      wordSet[level] = this.generateList(level, this._flow[level].words, language);
+
+    for (const level of this.levels)
+      wordSet[level] = this.generateList(level, this.flow[level].words, language);
 
     return wordSet;
   }
 
   generateList(length, words, language) {
-    if (!this._levels.includes(length)) throw new Error('Word lenght out of bounds');
+    if (!this.levels.includes(length)) throw new Error('Word lenght out of bounds');
 
     if (words === -1) words = 20;
 
-    let wordList = [];
-    const pack = this._packs[language][length];
+    const wordList = [];
+    const pack = this.packs[language][length];
 
     while (wordList.length !== words) {
       const index = Math.floor(Math.random() * (pack.length));

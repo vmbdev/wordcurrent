@@ -12,7 +12,7 @@ const scramble = (word) => {
 }
 
 const nextWord = (wordset) => {
-  let level = Object.keys(wordset)[0];
+  const level = Object.keys(wordset)[0];
 
   return wordset[level][0];
 }
@@ -42,8 +42,10 @@ const attempt = async (req, reply) => {
     .where({ key });
   
   const time = query.time - (~~(Date.now() / 1000) - query.timestamp);
+
   if (time <= 0) {
     await knex('games').where({ id: query.id }).update({ time: 0 });
+
     return { points: query.points, attempt: 'timeout' };
   }
 
@@ -58,19 +60,21 @@ const attempt = async (req, reply) => {
     // if there's only one word remaining in the current level
     if (wordset[currentLevel].length === 1) {
       // if there's only one level left, refill it
-      if (remainingLevels.length === 1)
+      if (remainingLevels.length === 1) {
         wordset[currentLevel] = wordlist.generateList(currentLevel, -1, query.language);
+      }
       else delete wordset[currentLevel];
     }
     else wordset[currentLevel].shift();
 
     await knex('games').where({ id: query.id }).update({ wordset, points });
+
     return { points, word: scramble(nextWord(wordset)), attempt: 'correct' };
   }
   else return { points: query.points, attempt: 'failed' }
 }
 
-const getWordpacks = async () => {
+const getWordpacks = () => {
   return { wordpacks: game.wordpacks };
 }
 
