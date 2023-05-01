@@ -8,13 +8,14 @@
     "preview": "vite preview --port 4173",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
     "server-dev": "nodemon --watch api --watch wordcurrent.config.js api/server.js",
-    "server-prod": "NODE_ENV=production node ./api/server.js"
+    "server-prod": "cross-env NODE_ENV=production node ./api/server.js"
   },
   "dependencies": {
     "@fastify/cors": "^8.2.0",
     "@fastify/static": "^6.5.1",
+    "cross-env": "^7.0.3",
     "fastify": "^4.10.2",
-    "knex": "^2.3.0",
+    "knex": "^2.4.0",
     "nanoid": "^4.0.0",
     "pg": "^8.8.0",
     "sass": "^1.56.1",
