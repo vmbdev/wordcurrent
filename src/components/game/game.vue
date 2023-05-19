@@ -125,30 +125,22 @@ const gameTimeout = () => {
   display: flex;
   flex-direction: column;
   padding-top: 30px;
-
-  @include m.media('mobile') {
-    padding-top: 0;
-    height: 100%;
-  }
+  
+  padding-top: 0;
+  height: 100%;
 
   &__content {
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    @include m.media('mobile') {
-      margin-top: 15px;
-      flex: 5;
-    }
+    flex: 5;
+    margin-top: 15px;
   }
 
   &__info {
     display: flex;
     flex-direction: row;
-
-    @include m.media('mobile') {
-      margin-bottom: 15rem;
-    }
+    margin-bottom: 15rem;
     
     div {
       margin: 0 16px;

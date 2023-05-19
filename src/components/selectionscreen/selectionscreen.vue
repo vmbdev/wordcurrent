@@ -19,8 +19,6 @@ import Footer from './footer.vue';
   padding: 0;
   display: flex;
   flex-direction: column;
-  @include m.media('mobile') {
-    height: 100vh;
-  }
+  height: 100%;
 }
 </style>

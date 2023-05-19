@@ -15,5 +15,6 @@ const i18n = useI18n({});
 .footer {
   padding-bottom: 0;
   margin-bottom: 0;
+  text-align: center;
 }
 </style>

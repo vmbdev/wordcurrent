@@ -20,10 +20,6 @@ import Brand from './brand.vue';
   align-items: center;
   display: flex;
   flex-direction: column;
-
-  @include m.media('mobile') {
-    // height: 90vh;
-    justify-content: center;
-  }
+  justify-content: center;
 }
 </style>

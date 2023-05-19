@@ -53,17 +53,14 @@ const gameTimeout = (stats) => {
 
 body {
   background-color: black;
-  @include m.media('mobile') {
-    margin: 0;
-    padding: 0;
-  }
   font-family: 'Mulish', sans-serif;
+
+  margin: 0;
+  padding: 0;
 }
 
 .app {
-  @include m.media('mobile') {
-    height: 100vh;
-  }
+  height: 100vh;
 }
 
 .container {
@@ -74,11 +71,9 @@ body {
   padding: 0 0 30px 0;
   width: 450px;
 
-  @include m.media('mobile') {
-    border: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
-  }
+  border: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
 }
 </style>
