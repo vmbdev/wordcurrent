@@ -43,40 +43,44 @@ watch(
   }
 )
 
-const startGame = () => {
-  fetch(`${settings.endpoint}/game/start/${game.wordpack}`)
-  .then(res => res.json())
-  .then(data => {
-    game.scrambledWord = data.word;
-    game.key = data.key;
-    game.time = data.time;
-    game.isRunning = true;
-    stats.reset();
+const startGame = async () => {
+  const res = await fetch(`${settings.endpoint}/game/start/${game.wordpack}`);
+  const data = await res.json();
 
-    emit('gameStart');
-  });
+  game.scrambledWord = data.word;
+  game.key = data.key;
+  game.time = data.time;
+  game.isRunning = true;
+  stats.reset();
+
+  emit('gameStart');
 }
 
-const attempt = () => {
-  if (currentUserInput.value.length == game.scrambledWord.length) {
-    fetch(`${settings.endpoint}/game/attempt/${currentUserInput.value.toLowerCase()}/${game.key}`)
-    .then(res => res.json())
-    .then(data => {
-      if (data.attempt === 'correct') {
-        game.scrambledWord = data.word;
-        stats.lastPoints = data.points;
-        stats.lastWords++;
-      }
-      else game.lastMistake = Date.now();
-      currentUserInput.value = '';
-    });
+const attempt = async () => {
+  if (currentUserInput.value.length === game.scrambledWord.length) {
+    const url = `${settings.endpoint}/game/attempt/${currentUserInput.value.toLowerCase()}/${game.key}`;
+    const res = await fetch(url);
+    const data = await res.json();
+
+    if (data.attempt === 'correct') {
+      game.scrambledWord = data.word;
+      stats.lastPoints = data.points;
+      stats.lastWords++;
+    }
+    else game.lastMistake = Date.now();
+
+    currentUserInput.value = '';
   }
 }
 
 const keyPressed = (key) => {
-  if (key === 'delete') currentUserInput.value = currentUserInput.value.slice(0, currentUserInput.value.length-1);
+  if (key === 'delete') {
+    currentUserInput.value = currentUserInput.value.slice(0, currentUserInput.value.length-1);
+  }
   else if (key === 'enter') attempt();
-  else if (currentUserInput.value.length < game.scrambledWord.length) currentUserInput.value += key;
+  else if (currentUserInput.value.length < game.scrambledWord.length) {
+    currentUserInput.value += key;
+  }
 }
 
 const gameTimeout = () => {
@@ -86,6 +90,7 @@ const gameTimeout = () => {
      stats.bestPoints = stats.lastPoints;
      stats.bestWords = stats.lastWords;
   }
+
   stats.totalWords += stats.lastWords;
   stats.totalPoints += stats.lastPoints;
 

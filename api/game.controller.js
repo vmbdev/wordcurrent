@@ -5,8 +5,11 @@ import { game } from '../wordcurrent.config.js';
 
 const scramble = (word) => {
   let scrambled = '';
-  word = word.split('');
-  while (word.length > 0) scrambled += word.splice(word.length * Math.random() << 0, 1);
+  const chars = word.split('');
+
+  while (chars.length > 0) {
+    scrambled += chars.splice(chars.length * Math.random() << 0, 1)
+  }
 
   return scrambled;
 }

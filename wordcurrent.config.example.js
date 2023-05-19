@@ -1,6 +1,6 @@
 export const server = {
   port: 5010,
-  enableCors: true,
+  enableCors: false,
   corsOrigin: 'http://localhost:3000'
 };
 

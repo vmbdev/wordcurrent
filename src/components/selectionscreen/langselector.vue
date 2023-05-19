@@ -7,10 +7,16 @@ const i18n = useI18n({});
 
 onBeforeMount(() => {
   const storedLocale = localStorage.getItem('WC_locale');
-  if (storedLocale && settings.langs.includes(storedLocale)) changeLocale(storedLocale);
-  else if (settings.langs.includes(navigator.language)) changeLocale(navigator.language);
+
+  if (storedLocale && settings.langs.includes(storedLocale)) {
+    changeLocale(storedLocale);
+  }
+  else if (settings.langs.includes(navigator.language)) {
+    changeLocale(navigator.language);
+  }
   else {
     const shortLocale = navigator.language.slice(0,2);
+    
     if (settings.langs.includes(shortLocale)) changeLocale(shortLocale);
   }
 });
@@ -21,8 +27,9 @@ const changeLocale = async (newLocale) => {
       const { default: messages } = await import(`../../locale/${newLocale}.json`);
       i18n.setLocaleMessage(newLocale, messages);
     }
-  i18n.locale.value = newLocale;
-  localStorage.setItem('WC_locale', newLocale);
+
+    i18n.locale.value = newLocale;
+    localStorage.setItem('WC_locale', newLocale);
   }
 }
 

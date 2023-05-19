@@ -7,17 +7,18 @@ const wordpacks = ref([]);
 const currentWordpack = ref();
 const parentSelectWordpack = inject('selectWordpack');
 
-onMounted(() => {
-  fetch(`${settings.endpoint}/game/wordpacks`)
-  .then((res) => res.json())
-  .then((data) => { 
-    wordpacks.value = data.wordpacks;
+onMounted(async () => {
+  const res = await fetch(`${settings.endpoint}/game/wordpacks`);
+  const data = await res.json();
 
-    const storedWordpack = localStorage.getItem('WC_wordpack');
-    if (storedWordpack && wordpacks.value.includes(storedWordpack)) currentWordpack.value = storedWordpack;
-    else currentWordpack.value = wordpacks.value[0];
+  wordpacks.value = data.wordpacks;
 
-  });
+  const storedWordpack = localStorage.getItem('WC_wordpack');
+
+  if (storedWordpack && wordpacks.value.includes(storedWordpack)) {
+    currentWordpack.value = storedWordpack;
+  }
+  else currentWordpack.value = wordpacks.value[0];
 });
 
 const selectWordpack = (pack) => {

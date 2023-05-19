@@ -2,8 +2,7 @@
 const emit = defineEmits(['keyPressed']);
 
 const thing = (event) => {
-  if (event.target.name === 'key')
-    emit('keyPressed', event.target.value);
+  if (event.target.name === 'key') emit('keyPressed', event.target.value);
 }
 </script>
 

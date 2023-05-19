@@ -11,9 +11,11 @@ const start = async () => {
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = path.dirname(__filename);
 
-  const fastify = Fastify({ logger: process.env.NODE_ENV === 'production' ? false : true });
+  const fastify = Fastify({ logger: (process.env.NODE_ENV !== 'production') });
 
-  if (server.enableCors && server.corsOrigin) fastify.register(cors, { origin: server.corsOrigin });
+  if (server.enableCors && server.corsOrigin) {
+    fastify.register(cors, { origin: server.corsOrigin });
+  }
 
   fastify.register(fstatic, { root: path.join(__dirname, '../dist') });
   fastify.register(routes);

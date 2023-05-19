@@ -17,7 +17,10 @@ class WordList {
   }
 
    loadWordList(pack) {
-    const rl = readline.createInterface({ input: fs.createReadStream(`./api/wordlists/${pack}`) });
+    const rl = readline.createInterface({
+      input: fs.createReadStream(`./api/wordlists/${pack}`)
+    });
+
     this.packs[pack] = {};
 
     for (const level of this.levels) {
@@ -25,21 +28,26 @@ class WordList {
     }
 
     rl.on('line', (line) => {
-      if (this.levels.includes(line.length)) this.packs[pack][line.length].push(line);
+      if (this.levels.includes(line.length)) {
+        this.packs[pack][line.length].push(line);
+      }
     })
   }
 
   generateSet(language) {
     const wordSet = {};
 
-    for (const level of this.levels)
+    for (const level of this.levels) {
       wordSet[level] = this.generateList(level, this.flow[level].words, language);
+    }
 
     return wordSet;
   }
 
   generateList(length, words, language) {
-    if (!this.levels.includes(length)) throw new Error('Word lenght out of bounds');
+    if (!this.levels.includes(length)) {
+      throw new Error('Word lenght out of bounds');
+    }
 
     if (words === -1) words = 20;
 

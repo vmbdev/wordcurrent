@@ -7,11 +7,12 @@ const defaultLocale = settings.langs[0];
 import(`./locale/${defaultLocale}.json`)
 .then(({ default: messages }) => {
   const i18n = createI18n({
+    legacy: false,
     locale: defaultLocale,
     messages: { [defaultLocale]: messages }
   });
-  
   const app = createApp(App);
+
   app.use(i18n);
   app.mount('#app');
 })
