@@ -16,6 +16,7 @@ const loadTrackers = async () => {
   if (Object.keys(trackers).length > 0) {
     for (const tracker of Object.keys(trackers)) {
       const { default: component } = await import(`./trackers/${tracker}.vue`);
+
       trackerComponents.push({ tracker, component });
     }
   }
@@ -33,13 +34,24 @@ const privacySeen = () => {
     <div class="gdpr__msg">{{ $t('gdpr.msg') }}</div>
     <form v-if="trackerComponents.length > 0">
       <div v-for="c in trackerComponents">
-        <input type="checkbox" :id="`tracker-${c.tracker}`" :value="`tracker-${c.tracker}`" />
-        <label :for="`tracker-${c.tracker}`">{{trackers[c.tracker].description}}</label>
+        <input
+          type="checkbox"
+          :id="`tracker-${c.tracker}`"
+          :value="`tracker-${c.tracker}`"
+        />
+        <label :for="`tracker-${c.tracker}`">
+          {{trackers[c.tracker].description}}
+        </label>
       </div>
     </form>
   </div>
 </Modal>
-<component v-for="c in trackerComponents" :is="c.component" :data="trackers[c.tracker]" />
+
+<component
+  v-for="c in trackerComponents"
+  :is="c.component"
+  :data="trackers[c.tracker]"
+/>
 </template>
 
 <style scoped lang="scss">

@@ -17,14 +17,18 @@ onBeforeMount(() => {
   else {
     const shortLocale = navigator.language.slice(0,2);
     
-    if (settings.langs.includes(shortLocale)) changeLocale(shortLocale);
+    if (settings.langs.includes(shortLocale)) {
+      changeLocale(shortLocale);
+    }
   }
 });
 
 const changeLocale = async (newLocale) => {
   if (settings.langs.includes(newLocale)) {
     if (!i18n.availableLocales.includes(newLocale)) {
-      const { default: messages } = await import(`../../locale/${newLocale}.json`);
+      const { default: messages } =
+        await import(`../../locale/${newLocale}.json`);
+
       i18n.setLocaleMessage(newLocale, messages);
     }
 
@@ -46,7 +50,10 @@ const getLocaleDisplayName = (locale) => {
 <div class="langselector">
   <div>{{ $t('langselector.interface') }}</div>
   <div>
-  <select @change="changeLocale($event.target.value)" class="langselector__select">
+  <select
+    @change="changeLocale($event.target.value)"
+    class="langselector__select"
+  >
     <option 
       v-for="locale in settings.langs"
       :key="`locale-${locale}`"

@@ -16,7 +16,7 @@
       max: 10
     },
     migrations: {
-      directory: './db'
+      directory: '../../db'
     }
   },
 
@@ -33,7 +33,7 @@
       max: 10
     },
     migrations: {
-      directory: './db'
+      directory: '../../db'
     }
   },
 
@@ -50,7 +50,7 @@
       max: 10
     },
     migrations: {
-      directory: './db'
+      directory: '../../db'
     }
   }
 

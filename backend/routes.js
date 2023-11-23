@@ -1,4 +1,4 @@
-import gameRoutes from './game.routes.js';
+import gameRoutes from './game/game.routes.js';
 
 async function routes (fastify, options, done) {
   fastify.register((fastify, options, done) => {

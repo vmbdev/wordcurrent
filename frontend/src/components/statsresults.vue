@@ -8,14 +8,31 @@ const props = defineProps({ stats: Object });
 <template>
 <Modal caller="stats">
   <div class="stats">
-    <div class="stats__lastpoints">{{ $t('stats.scorepoints', { points: props.stats.lastPoints }) }}</div>
-    <div class="stats__lastwords">{{ $t('stats.scorewords', { words: props.stats.lastWords }) }}</div>
+    <div class="stats__lastpoints">
+      {{ $t('stats.scorepoints', { points: props.stats.lastPoints }) }}
+    </div>
+    <div class="stats__lastwords">
+      {{ $t('stats.scorewords', { words: props.stats.lastWords }) }}
+    </div>
     <div class="stats__history">
-      {{ $t('stats.best', { points: props.stats.bestPoints, words: props.stats.bestWords })}}
-      {{ $t('stats.total', { points: props.stats.totalPoints, words: props.stats.totalWords })}}
+      {{
+        $t('stats.best', {
+          points: props.stats.bestPoints,
+          words: props.stats.bestWords
+        })
+      }}
+      {{
+        $t('stats.total', {
+          points: props.stats.totalPoints,
+          words: props.stats.totalWords
+        })
+      }}
     </div>
     <SocialShare
-      :msg="$t('stats.msg', { points: props.stats.lastPoints, words: props.stats.lastWords })"
+      :msg="$t('stats.msg', {
+        points: props.stats.lastPoints,
+        words: props.stats.lastWords
+      })"
       :networks="['whatsapp', 'twitter', 'facebook']"
       />
   </div>

@@ -4,6 +4,7 @@ import settings from './settings.js';
 import App from './app.vue';
 
 const defaultLocale = settings.langs[0];
+
 import(`./locale/${defaultLocale}.json`)
 .then(({ default: messages }) => {
   const i18n = createI18n({

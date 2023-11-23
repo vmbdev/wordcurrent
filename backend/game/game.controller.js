@@ -1,7 +1,8 @@
-import { nanoid } from 'nanoid/async';
-import wordlist from './wordlistinstance.js';
-import knex from './database.js';
-import { game } from '../wordcurrent.config.js';
+import { nanoid } from 'nanoid';
+
+import wordlist from '../wordlist/wordlistinstance.js';
+import knex from '../database.js';
+import { game } from '../config/wordcurrent.config.js';
 
 const scramble = (word) => {
   let scrambled = '';
@@ -22,7 +23,7 @@ const nextWord = (wordset) => {
 
 const start = async (req, reply) => {
   const { language } = req.params;
-  const key = await nanoid();
+  const key = nanoid();
   const wordset = wordlist.generateSet(language);
 
   await knex('games').insert({
@@ -64,17 +65,30 @@ const attempt = async (req, reply) => {
     if (wordset[currentLevel].length === 1) {
       // if there's only one level left, refill it
       if (remainingLevels.length === 1) {
-        wordset[currentLevel] = wordlist.generateList(currentLevel, -1, query.language);
+        wordset[currentLevel] = wordlist.generateList(
+          currentLevel,
+          -1,
+          query.language
+        );
       }
       else delete wordset[currentLevel];
     }
     else wordset[currentLevel].shift();
 
-    await knex('games').where({ id: query.id }).update({ wordset, points });
+    await knex('games')
+      .where({ id: query.id })
+      .update({ wordset, points });
 
-    return { points, word: scramble(nextWord(wordset)), attempt: 'correct' };
+    return {
+      points,
+      word: scramble(nextWord(wordset)),
+      attempt: 'correct'
+    };
   }
-  else return { points: query.points, attempt: 'failed' }
+  else return {
+    points: query.points,
+    attempt: 'failed'
+  }
 }
 
 const getWordpacks = () => {
@@ -83,7 +97,10 @@ const getWordpacks = () => {
 
 const status = async (req, reply) => {
   const { key } = req.params;
-  const query = await knex('games').select('time', 'points', 'timestamp').where({ key }).first();
+  const query = await knex('games')
+    .select('time', 'points', 'timestamp')
+    .where({ key })
+    .first();
   const time = query.time - (~~(Date.now() / 1000) - query.timestamp);
 
   return { time: time > 0 ? time : 0, points: query.points };

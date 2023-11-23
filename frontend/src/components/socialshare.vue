@@ -19,7 +19,11 @@ onMounted(async () => {
 <div class="socialshare">
   <div class="socialshare__title">{{ $t('socialshare.share') }}</div>
   <div class="socialshare__networks">
-    <component v-for="network in networkComponents" :is="network" :msg="props.msg" />
+    <component
+      v-for="network in networkComponents"
+      :is="network"
+      :msg="props.msg"
+    />
   </div>
 </div>
 </template>

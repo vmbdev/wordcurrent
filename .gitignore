@@ -27,8 +27,8 @@ coverage
 *.sln
 *.sw?
 
-wordcurrent.config.js
-src/settings.js
-knexfile.js
+/backend/config/wordcurrent.config.js
+/backend/config/knexfile.js
+/frontend/src/settings.js
 MOCKUP.md
 TODO.md

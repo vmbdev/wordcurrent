@@ -1,5 +1,6 @@
 <script setup>
 import { onBeforeMount, ref, reactive, watch } from 'vue';
+
 import ScrambledWord from './scrambledword.vue';
 import WordInput from './wordinput.vue';
 import Keyboard from './keyboard.vue';
@@ -75,9 +76,12 @@ const attempt = async () => {
 
 const keyPressed = (key) => {
   if (key === 'delete') {
-    currentUserInput.value = currentUserInput.value.slice(0, currentUserInput.value.length-1);
+    currentUserInput.value =
+      currentUserInput.value.slice(0, currentUserInput.value.length-1);
   }
-  else if (key === 'enter') attempt();
+  else if (key === 'enter') {
+    attempt();
+  }
   else if (currentUserInput.value.length < game.scrambledWord.length) {
     currentUserInput.value += key;
   }
@@ -111,7 +115,10 @@ const gameTimeout = () => {
         />
         <Scoreboard :points="stats.lastPoints" />
       </div>
-      <ScrambledWord :word="game.scrambledWord" :last-mistake="game.lastMistake" />
+      <ScrambledWord
+        :word="game.scrambledWord"
+        :last-mistake="game.lastMistake"
+      />
       <WordInput :word="currentUserInput" />
     </div>
     <Keyboard @key-pressed="keyPressed" />

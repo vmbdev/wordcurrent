@@ -18,7 +18,7 @@ class WordList {
 
    loadWordList(pack) {
     const rl = readline.createInterface({
-      input: fs.createReadStream(`./api/wordlists/${pack}`)
+      input: fs.createReadStream(`./backend/assets/lists/${pack}`)
     });
 
     this.packs[pack] = {};
@@ -38,7 +38,8 @@ class WordList {
     const wordSet = {};
 
     for (const level of this.levels) {
-      wordSet[level] = this.generateList(level, this.flow[level].words, language);
+      wordSet[level] =
+        this.generateList(level, this.flow[level].words, language);
     }
 
     return wordSet;

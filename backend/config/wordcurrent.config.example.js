@@ -7,7 +7,10 @@ export const server = {
 export const game = {
   wordpacks: ['castellano', 'english'],
   time: 60,
-  // key implies the length of the word, i.e. 4 for "sale", 5 for "crazy", 6 for "shovel", etc
+  /**
+   * key implies the length of the word, i.e. 4 for "sale", 5 for "crazy",
+   * 6 for "shovel", etc
+   */
   flow: {
     4: {
       words: 3,

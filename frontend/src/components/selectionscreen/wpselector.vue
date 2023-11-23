@@ -26,8 +26,13 @@ const selectWordpack = (pack) => {
   currentWordpack.value = pack;
 }
 
-// reduce amount of parent calls as WP can be loaded by user or by localstorage.getItem
-watch(currentWordpack, (newCurrentWp) => { parentSelectWordpack(newCurrentWp); });
+/**
+ * reduce amount of parent calls as WP can be loaded by user or by
+ * localstorage.getItem
+ */
+watch(currentWordpack, (newCurrentWp) => {
+  parentSelectWordpack(newCurrentWp);
+});
 </script>
 
 <template>

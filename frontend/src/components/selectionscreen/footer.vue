@@ -6,7 +6,13 @@ const i18n = useI18n({});
 <template>
 <footer class="footer">
   <i18n-t keypath="footer.msg" scope="global" tag="span">
-    <a href="https://github.com/vmbdev/wordcurrent" target="_blank" alt="GitHub Repository">GitHub</a>
+    <a
+      href="https://github.com/vmbdev/wordcurrent"
+      target="_blank"
+      alt="GitHub Repository"
+    >
+      GitHub
+    </a>
   </i18n-t>
 </footer>
 </template>

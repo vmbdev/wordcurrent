@@ -5,8 +5,9 @@ const props = defineProps({
 </script>
 
 <template>
-<div class="scoreboard">
-  {{ $t('scoreboard.points', { points: props.points }) }}</div>
+  <div class="scoreboard">
+    {{ $t('scoreboard.points', { points: props.points }) }}
+  </div>
 </template>
 
 <style lang="scss">
