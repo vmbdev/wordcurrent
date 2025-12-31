@@ -3,9 +3,9 @@ const emit = defineEmits(['close']);
 </script>
 
 <template>
-<button class="closebutton" @click="() => { emit('close') }">
-  <div class="closebutton__x">&#10006;</div>
-</button>
+  <button class="closebutton" @click="emit('close')">
+    <div class="closebutton__x">&#10006;</div>
+  </button>
 </template>
 
 <style lang="scss">

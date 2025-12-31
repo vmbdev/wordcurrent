@@ -9,9 +9,9 @@ const getUrl = () => {
 </script>
 
 <template>
-<div>
-  <a :href="getUrl()" target="_blank">
-    <img :src="icon" class="socialshare__icon" alt="Twitter" />
-  </a>
-</div>
+  <div>
+    <a :href="getUrl()" target="_blank">
+      <img :src="icon" class="socialshare__icon" alt="Twitter" />
+    </a>
+  </div>
 </template>

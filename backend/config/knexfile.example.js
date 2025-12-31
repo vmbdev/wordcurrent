@@ -1,8 +1,7 @@
 /**
  * @type { Object.<string, import("knex").Knex.Config> }
  */
- export default {
-
+export default {
   development: {
     client: 'pg',
     connection: {
@@ -53,5 +52,4 @@
       directory: '../../db'
     }
   }
-
 };

@@ -3,8 +3,9 @@ import { onMounted, shallowReactive } from 'vue';
 
 const props = defineProps({
   msg: String,
-  networks: Array
+  networks: Array,
 });
+
 const networkComponents = shallowReactive([]);
 
 onMounted(async () => {
@@ -16,16 +17,16 @@ onMounted(async () => {
 </script>
 
 <template>
-<div class="socialshare">
-  <div class="socialshare__title">{{ $t('socialshare.share') }}</div>
-  <div class="socialshare__networks">
-    <component
-      v-for="network in networkComponents"
-      :is="network"
-      :msg="props.msg"
-    />
+  <div class="socialshare">
+    <div class="socialshare__title">{{ $t('socialshare.share') }}</div>
+    <div class="socialshare__networks">
+      <component
+        v-for="network in networkComponents"
+        :is="network"
+        :msg="props.msg"
+      />
+    </div>
   </div>
-</div>
 </template>
 
 <style lang="scss">

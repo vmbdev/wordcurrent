@@ -16,7 +16,7 @@ class WordList {
     }
   }
 
-   loadWordList(pack) {
+  loadWordList(pack) {
     const rl = readline.createInterface({
       input: fs.createReadStream(`./backend/assets/lists/${pack}`)
     });

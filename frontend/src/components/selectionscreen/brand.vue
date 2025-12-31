@@ -1,11 +1,7 @@
-<script setup>
-
-</script>
-
 <template>
-<div class="brand">
-Word Current
-</div>
+  <div class="brand">
+    Word Current
+  </div>
 </template>
 
 <style lang="scss">

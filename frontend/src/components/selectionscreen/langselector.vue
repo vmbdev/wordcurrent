@@ -10,13 +10,11 @@ onBeforeMount(() => {
 
   if (storedLocale && settings.langs.includes(storedLocale)) {
     changeLocale(storedLocale);
-  }
-  else if (settings.langs.includes(navigator.language)) {
+  } else if (settings.langs.includes(navigator.language)) {
     changeLocale(navigator.language);
-  }
-  else {
+  } else {
     const shortLocale = navigator.language.slice(0,2);
-    
+
     if (settings.langs.includes(shortLocale)) {
       changeLocale(shortLocale);
     }
@@ -47,24 +45,24 @@ const getLocaleDisplayName = (locale) => {
 </script>
 
 <template>
-<div class="langselector">
-  <div>{{ $t('langselector.interface') }}</div>
-  <div>
-  <select
-    @change="changeLocale($event.target.value)"
-    class="langselector__select"
-  >
-    <option 
-      v-for="locale in settings.langs"
-      :key="`locale-${locale}`"
-      :value="locale"
-      :selected="$i18n.locale === locale"
+  <div class="langselector">
+    <div>{{ $t('langselector.interface') }}</div>
+    <div>
+    <select
+      @change="changeLocale($event.target.value)"
+      class="langselector__select"
     >
-    {{ getLocaleDisplayName(locale) }}
-    </option>
-  </select>
+      <option
+        v-for="locale in settings.langs"
+        :key="`locale-${locale}`"
+        :value="locale"
+        :selected="$i18n.locale === locale"
+      >
+      {{ getLocaleDisplayName(locale) }}
+      </option>
+    </select>
+    </div>
   </div>
-</div>
 </template>
 
 <style lang="scss">
@@ -79,7 +77,7 @@ const getLocaleDisplayName = (locale) => {
     background-color: white;
     border: 0;
     border-bottom: 1px solid black;
-    padding: 5px;    
+    padding: 5px;
   }
 }
 </style>

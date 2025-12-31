@@ -1,6 +1,5 @@
 <script setup>
 import { onBeforeMount, ref, reactive, watch } from 'vue';
-
 import ScrambledWord from './scrambledword.vue';
 import WordInput from './wordinput.vue';
 import Keyboard from './keyboard.vue';
@@ -9,11 +8,12 @@ import Scoreboard from './scoreboard.vue';
 import Stats from '../../helpers/stats.js';
 import settings from '../../settings.js';
 
-const emit = defineEmits(['gameStart', 'gameTimeout']);
 const props = defineProps({
   wordpack: String,
-  startNewGame: Boolean
+  startNewGame: Boolean,
 });
+
+const emit = defineEmits(['gameStart', 'gameTimeout']);
 
 const stats = reactive(new Stats());
 const currentUserInput = ref('');
@@ -26,23 +26,17 @@ const game = reactive({
   lastMistake: 0
 });
 
+watch(() => props.wordpack, (newWp) => {
+  game.wordpack = newWp;
+});
+
+watch(() => props.startNewGame, (newGame) => {
+  if (newGame) startGame();
+})
+
 onBeforeMount(() => {
   stats.loadFromStorage();
 });
-
-watch(
-  () => props.wordpack,
-  (newWp) => {
-    game.wordpack = newWp;
-  }
-);
-
-watch(
-  () => props.startNewGame,
-  (newGame) => {
-    if (newGame) startGame();
-  }
-)
 
 const startGame = async () => {
   const res = await fetch(`${settings.endpoint}/game/start/${game.wordpack}`);
@@ -91,8 +85,8 @@ const gameTimeout = () => {
   game.isRunning = false;
 
   if (stats.lastPoints > stats.bestPoints) {
-     stats.bestPoints = stats.lastPoints;
-     stats.bestWords = stats.lastWords;
+    stats.bestPoints = stats.lastPoints;
+    stats.bestWords = stats.lastWords;
   }
 
   stats.totalWords += stats.lastWords;
@@ -132,7 +126,7 @@ const gameTimeout = () => {
   display: flex;
   flex-direction: column;
   padding-top: 30px;
-  
+
   padding-top: 0;
   height: 100%;
 
@@ -148,7 +142,7 @@ const gameTimeout = () => {
     display: flex;
     flex-direction: row;
     margin-bottom: 15rem;
-    
+
     div {
       margin: 0 16px;
     }

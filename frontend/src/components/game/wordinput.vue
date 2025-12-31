@@ -5,7 +5,7 @@ const props = defineProps({
 </script>
 
 <template>
-<div class="wordinput">{{ props.word }}</div>
+  <div class="wordinput">{{ props.word }}</div>
 </template>
 
 <style lang="scss">
@@ -26,7 +26,7 @@ const props = defineProps({
   &:after {
     @include m.media('mobile') {
       margin-bottom: 30px;
-      content:'';
+      content: '';
     }
   }
 }

@@ -1,20 +1,15 @@
-<script setup>
-import { useI18n } from 'vue-i18n';
-const i18n = useI18n({});
-</script>
-
 <template>
-<footer class="footer">
-  <i18n-t keypath="footer.msg" scope="global" tag="span">
-    <a
-      href="https://github.com/vmbdev/wordcurrent"
-      target="_blank"
-      alt="GitHub Repository"
-    >
-      GitHub
-    </a>
-  </i18n-t>
-</footer>
+  <footer class="footer">
+    <i18n-t keypath="footer.msg" scope="global" tag="span">
+      <a
+        href="https://github.com/vmbdev/wordcurrent"
+        target="_blank"
+        alt="GitHub Repository"
+      >
+        GitHub
+      </a>
+    </i18n-t>
+  </footer>
 </template>
 
 <style lang="scss">

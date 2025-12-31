@@ -1,13 +1,13 @@
 <script setup>
-import { inject } from 'vue';
+import { useGame } from '../../composables/game';
 
-const startPressed = inject('startPressed')
+const game = useGame()
 </script>
 
 <template>
-<button class="startbutton" @click="() => { startPressed() }">
-  {{ $t("startbutton.text") }}
-</button>
+  <button class="startbutton" @click="game.startPressed">
+    {{ $t('startbutton.text') }}
+  </button>
 </template>
 
 <style lang="scss">

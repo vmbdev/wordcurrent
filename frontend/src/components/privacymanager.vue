@@ -29,29 +29,33 @@ const privacySeen = () => {
 </script>
 
 <template>
-<Modal v-if="!isPrivacySeen" caller="gdpr" @close="privacySeen">
-  <div class="gdpr">
-    <div class="gdpr__msg">{{ $t('gdpr.msg') }}</div>
-    <form v-if="trackerComponents.length > 0">
-      <div v-for="c in trackerComponents">
-        <input
-          type="checkbox"
-          :id="`tracker-${c.tracker}`"
-          :value="`tracker-${c.tracker}`"
-        />
-        <label :for="`tracker-${c.tracker}`">
-          {{trackers[c.tracker].description}}
-        </label>
-      </div>
-    </form>
-  </div>
-</Modal>
+  <Modal
+    v-if="!isPrivacySeen"
+    caller="gdpr"
+    @close="privacySeen"
+  >
+    <div class="gdpr">
+      <div class="gdpr__msg">{{ $t('gdpr.msg') }}</div>
+      <form v-if="trackerComponents.length > 0">
+        <div v-for="c in trackerComponents">
+          <input
+            type="checkbox"
+            :id="`tracker-${c.tracker}`"
+            :value="`tracker-${c.tracker}`"
+          />
+          <label :for="`tracker-${c.tracker}`">
+            {{trackers[c.tracker].description}}
+          </label>
+        </div>
+      </form>
+    </div>
+  </Modal>
 
-<component
-  v-for="c in trackerComponents"
-  :is="c.component"
-  :data="trackers[c.tracker]"
-/>
+  <component
+    v-for="tracker in trackerComponents"
+    :is="tracker.component"
+    :data="trackers[tracker.tracker]"
+  />
 </template>
 
 <style scoped lang="scss">

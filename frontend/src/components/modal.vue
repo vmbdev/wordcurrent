@@ -1,20 +1,20 @@
 <script setup>
 import CloseButton from './closebutton.vue';
 
-const emit = defineEmits(['close']);
 const props = defineProps({
-  caller: String
+  caller: String,
 });
 
+const emit = defineEmits(['close']);
 </script>
 
 <template>
-<div class="modal">
-  <CloseButton @close="() => { emit('close', props.caller); }" />
-  <div class="modal__content">
-    <slot></slot>
+  <div class="modal">
+    <CloseButton @close="emit('close', props.caller)" />
+    <div class="modal__content">
+      <slot></slot>
+    </div>
   </div>
-</div>
 </template>
 
 <style lang="scss">

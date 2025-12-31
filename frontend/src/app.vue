@@ -1,21 +1,16 @@
 <script setup>
-import { ref, provide } from 'vue';
+import { ref } from 'vue';
 import Game from './components/game/game.vue';
 import StatsResults from './components/statsresults.vue';
 // import PrivacyManager from './components/privacymanager.vue';
 import SelectionScreen from './components/selectionscreen/selectionscreen.vue';
+import { useGame } from './composables/game';
 
-const currentWordpack = ref('');
 const isGameRunning = ref(false);
-const startNewGame = ref(false);
 const showStats = ref(false);
 const currentStats = ref();
 
-// avoiding huge event drilling
-const startPressed = () => { startNewGame.value = true; }
-const selectWordpack = (pack) => { currentWordpack.value = pack; }
-provide('selectWordpack', selectWordpack);
-provide('startPressed', startPressed);
+const { startNewGame, currentWordpack } = useGame()
 
 const gameStarted = () => {
   isGameRunning.value = true;
@@ -30,22 +25,22 @@ const gameTimeout = (stats) => {
 </script>
 
 <template>
-<div class="container">
-  <SelectionScreen v-if="!isGameRunning" />
-  <Game
-    v-show="isGameRunning"
-    :wordpack="currentWordpack"
-    :start-new-game="startNewGame"
-    @game-start="gameStarted"
-    @game-timeout="gameTimeout"
+  <div class="container">
+    <SelectionScreen v-if="!isGameRunning" />
+    <Game
+      v-show="isGameRunning"
+      :wordpack="currentWordpack"
+      :start-new-game="startNewGame"
+      @game-start="gameStarted"
+      @game-timeout="gameTimeout"
+    />
+  </div>
+  <StatsResults
+    v-if="showStats"
+    :stats="currentStats"
+    @close="() => { showStats = false }"
   />
-</div>
-<StatsResults
-  v-if="showStats"
-  :stats="currentStats"
-  @close="() => { showStats = false }"
-/>
-<!-- <PrivacyManager /> -->
+  <!-- <PrivacyManager /> -->
 </template>
 
 <style lang="scss">

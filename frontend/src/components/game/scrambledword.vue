@@ -1,14 +1,20 @@
 <script setup>
-import { onMounted, watch, ref } from 'vue';
+import { onMounted, watch, ref, useTemplateRef } from 'vue';
 
 const props = defineProps({
   word: String,
-  lastMistake: Number
+  lastMistake: Number,
 });
+
+const scrambledWord = useTemplateRef('scrambledword');
 const animation = ref();
 
+watch(() => props.lastMistake, () => {
+  animation.value.play();
+});
+
 onMounted(() => {
-  animation.value = document.getElementById('scrambledword').animate([
+  animation.value = scrambledWord.value.animate([
     { color: 'red' }
   ], {
     duration: 600,
@@ -18,17 +24,10 @@ onMounted(() => {
   });
   animation.value.cancel();
 });
-
-watch(
-  () => props.lastMistake,
-  () => {
-    animation.value.play();
-  }
-);
 </script>
 
 <template>
-<div class="scrambledword" id="scrambledword">
+<div class="scrambledword" ref="scrambledword">
   {{ props.word }}
 </div>
 </template>

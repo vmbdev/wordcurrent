@@ -2,41 +2,43 @@
 import Modal from './modal.vue';
 import SocialShare from './socialshare.vue';
 
-const props = defineProps({ stats: Object });
+const props = defineProps({
+  stats: Object,
+});
 </script>
 
 <template>
-<Modal caller="stats">
-  <div class="stats">
-    <div class="stats__lastpoints">
-      {{ $t('stats.scorepoints', { points: props.stats.lastPoints }) }}
-    </div>
-    <div class="stats__lastwords">
-      {{ $t('stats.scorewords', { words: props.stats.lastWords }) }}
-    </div>
-    <div class="stats__history">
-      {{
-        $t('stats.best', {
-          points: props.stats.bestPoints,
-          words: props.stats.bestWords
-        })
-      }}
-      {{
-        $t('stats.total', {
-          points: props.stats.totalPoints,
-          words: props.stats.totalWords
-        })
-      }}
-    </div>
-    <SocialShare
-      :msg="$t('stats.msg', {
-        points: props.stats.lastPoints,
-        words: props.stats.lastWords
-      })"
-      :networks="['whatsapp', 'twitter', 'facebook']"
+  <Modal caller="stats">
+    <div class="stats">
+      <div class="stats__lastpoints">
+        {{ $t('stats.scorepoints', { points: props.stats.lastPoints }) }}
+      </div>
+      <div class="stats__lastwords">
+        {{ $t('stats.scorewords', { words: props.stats.lastWords }) }}
+      </div>
+      <div class="stats__history">
+        {{
+          $t('stats.best', {
+            points: props.stats.bestPoints,
+            words: props.stats.bestWords
+          })
+        }}
+        {{
+          $t('stats.total', {
+            points: props.stats.totalPoints,
+            words: props.stats.totalWords
+          })
+        }}
+      </div>
+      <SocialShare
+        :msg="$t('stats.msg', {
+          points: props.stats.lastPoints,
+          words: props.stats.lastWords
+        })"
+        :networks="['whatsapp', 'twitter', 'facebook']"
       />
-  </div>
-</Modal>
+    </div>
+  </Modal>
 </template>
 
 <style lang="scss">
@@ -61,6 +63,5 @@ const props = defineProps({ stats: Object });
   &__history {
     padding-top: 30px;
   }
-
 }
 </style>

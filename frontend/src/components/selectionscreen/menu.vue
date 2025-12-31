@@ -5,11 +5,11 @@ import Brand from './brand.vue';
 </script>
 
 <template>
-<div class="menu">
-  <Brand />
-  <WpSelector />
-  <StartButton />
-</div>
+  <div class="menu">
+    <Brand />
+    <WpSelector />
+    <StartButton />
+  </div>
 </template>
 
 <style lang="scss">

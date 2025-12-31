@@ -1,6 +1,6 @@
 <script setup>
 const props = defineProps({
-  'points': Number
+  'points': Number,
 });
 </script>
 
@@ -9,6 +9,3 @@ const props = defineProps({
     {{ $t('scoreboard.points', { points: props.points }) }}
   </div>
 </template>
-
-<style lang="scss">
-</style>

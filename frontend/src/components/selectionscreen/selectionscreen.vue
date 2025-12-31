@@ -5,11 +5,11 @@ import Footer from './footer.vue';
 </script>
 
 <template>
-<div class="selectionscreen">
-  <NavBar />
-  <Menu />
-  <Footer />
-</div>
+  <div class="selectionscreen">
+    <NavBar />
+    <Menu />
+    <Footer />
+  </div>
 </template>
 
 <style lang="scss">

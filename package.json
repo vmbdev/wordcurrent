@@ -21,13 +21,14 @@
     "pg": "^8.8.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^4.5.0",
-    "sass": "^1.56.1",
-    "vue": "^3.2.45",
-    "vue-i18n": "^9.2.2",
-    "eslint": "^8.28.0",
-    "eslint-plugin-vue": "^9.8.0",
+    "@vitejs/plugin-vue": "^6.0.3",
+    "eslint": "^9.39.2",
+    "eslint-plugin-vue": "^10.6.2",
     "nodemon": "^2.0.20",
-    "vite": "^5.0.0"
+    "sass": "^1.97.1",
+    "vite": "^7.0.0",
+    "vite-plugin-vue-devtools": "^8.0.5",
+    "vue": "^3.2.45",
+    "vue-i18n": "^11.2.7"
   }
 }

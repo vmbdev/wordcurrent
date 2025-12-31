@@ -3,13 +3,12 @@ import LangSelector from './langselector.vue';
 </script>
 
 <template>
-<nav class="navbar">
-  <div class="navbar__left">
-  </div>
-  <div class="navbar__right">
-    <LangSelector />
-  </div>
-</nav>
+  <nav class="navbar">
+    <div class="navbar__left"></div>
+    <div class="navbar__right">
+      <LangSelector />
+    </div>
+  </nav>
 </template>
 
 <style lang="scss">
