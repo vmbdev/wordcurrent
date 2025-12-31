@@ -1,12 +1,12 @@
 import gameRoutes from './game/game.routes.js';
 
-async function routes (fastify, options, done) {
+function routes (fastify, options, done) {
   fastify.register((fastify, options, done) => {
     fastify.register(gameRoutes, { prefix: '/game' });
     done();
   }, { prefix: '/api' });
 
-  fastify.get('/', async (req, reply) => {
+  fastify.get('/', (req, reply) => {
     return reply.sendFile('index.html');
   });
 
