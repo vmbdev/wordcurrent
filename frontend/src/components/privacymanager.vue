@@ -20,12 +20,12 @@ const loadTrackers = async () => {
       trackerComponents.push({ tracker, component });
     }
   }
-}
+};
 
 const privacySeen = () => {
   localStorage.setItem('WC_gdpr', true);
   isPrivacySeen.value = true;
-}
+};
 </script>
 
 <template>
@@ -35,16 +35,21 @@ const privacySeen = () => {
     @close="privacySeen"
   >
     <div class="gdpr">
-      <div class="gdpr__msg">{{ $t('gdpr.msg') }}</div>
+      <div class="gdpr__msg">
+        {{ $t('gdpr.msg') }}
+      </div>
       <form v-if="trackerComponents.length > 0">
-        <div v-for="c in trackerComponents">
+        <div
+          v-for="c in trackerComponents"
+          :key="c.tracker"
+        >
           <input
-            type="checkbox"
             :id="`tracker-${c.tracker}`"
+            type="checkbox"
             :value="`tracker-${c.tracker}`"
-          />
+          >
           <label :for="`tracker-${c.tracker}`">
-            {{trackers[c.tracker].description}}
+            {{ trackers[c.tracker].description }}
           </label>
         </div>
       </form>
@@ -52,26 +57,27 @@ const privacySeen = () => {
   </Modal>
 
   <component
-    v-for="tracker in trackerComponents"
     :is="tracker.component"
+    v-for="tracker in trackerComponents"
+    :key="tracker.tracker"
     :data="trackers[tracker.tracker]"
   />
 </template>
 
 <style scoped lang="scss">
 .modal {
-  background-color: #0F3460;
+  background-color: #0f3460;
   color: white;
 }
 </style>
 
 <style lang="scss">
 .gdpr {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 0 25px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 25px;
 }
 </style>

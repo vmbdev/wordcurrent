@@ -7,14 +7,14 @@ const { t } = useI18n();
 
 const rows = [
   [
-    { label: 'Q', value: 'q' }, 
-    { label: 'W', value: 'w' }, 
-    { label: 'E', value: 'e' }, 
-    { label: 'R', value: 'r' }, 
-    { label: 'T', value: 't' }, 
-    { label: 'Y', value: 'y' }, 
-    { label: 'U', value: 'u' }, 
-    { label: 'I', value: 'i' }, 
+    { label: 'Q', value: 'q' },
+    { label: 'W', value: 'w' },
+    { label: 'E', value: 'e' },
+    { label: 'R', value: 'r' },
+    { label: 'T', value: 't' },
+    { label: 'Y', value: 'y' },
+    { label: 'U', value: 'u' },
+    { label: 'I', value: 'i' },
     { label: 'O', value: 'o' },
     { label: 'P', value: 'p' },
   ],
@@ -40,18 +40,31 @@ const rows = [
     { label: 'N', value: 'n' },
     { label: 'M', value: 'm' },
     { label: t('keyboard.delete'), value: 'delete' },
-  ]
-]
+  ],
+];
 
 const keyPressed = (event) => {
   if (event.target.name === 'key') emit('keyPressed', event.target.value);
-}
+};
 </script>
 
 <template>
-  <div class="keyboard" @click="keyPressed">
-    <div v-for="row of rows" class="keyboard__row">
-      <button v-for="key in row" class="key key__char" name="key" :value="key.value">
+  <div
+    class="keyboard"
+    @click="keyPressed"
+  >
+    <div
+      v-for="row of rows"
+      :key="row"
+      class="keyboard__row"
+    >
+      <button
+        v-for="key in row"
+        :key="key.value"
+        class="key key__char"
+        name="key"
+        :value="key.value"
+      >
         {{ key.label }}
       </button>
     </div>
@@ -82,20 +95,19 @@ const keyPressed = (event) => {
     padding: 5px;
     margin: 0 1px;
     font-size: 10pt;
-    background-color: #51557E;
+    background-color: #51557e;
     color: white;
     border: 0;
 
     &__char {
-
       &:active {
-        background-color: color.scale(#51557E, $lightness: -25%);
+        background-color: color.scale(#51557e, $lightness: -25%);
       }
     }
 
     &__extra {
       // flex: 1;
-      background-color: #06283D;
+      background-color: #06283d;
     }
   }
 }

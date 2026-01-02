@@ -24,12 +24,15 @@ class Stats {
   }
 
   store() {
-    localStorage.setItem('WC_stats', JSON.stringify({
-      bestPoints: this.bestPoints,
-      bestWords: this.bestWords,
-      totalPoints: this.totalPoints,
-      totalWords: this.totalWords
-    }));
+    localStorage.setItem(
+      'WC_stats',
+      JSON.stringify({
+        bestPoints: this.bestPoints,
+        bestWords: this.bestWords,
+        totalPoints: this.totalPoints,
+        totalWords: this.totalWords,
+      }),
+    );
   }
 }
 

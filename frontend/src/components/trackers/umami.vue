@@ -2,7 +2,10 @@
 import { onMounted } from 'vue';
 
 const props = defineProps({
-  data: Object,
+  data: {
+    type: Object,
+    required: true,
+  },
 });
 
 onMounted(() => {
@@ -16,4 +19,5 @@ onMounted(() => {
 </script>
 
 <template>
+  <div></div>
 </template>

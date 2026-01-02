@@ -1,6 +1,9 @@
 <script setup>
 const props = defineProps({
-  'points': Number,
+  points: {
+    type: Number,
+    required: true,
+  },
 });
 </script>
 

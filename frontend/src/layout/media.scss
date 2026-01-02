@@ -1,17 +1,29 @@
 @use 'sass:map';
 
 $breakpoints: (
-  'mobile': ( 'min': 280px, 'max': 576px ),
-  'tablet': ( 'min': 768px, 'max': 1024px ),
-  'desktop': ( 'min': 1025px, 'max': 1280px),
-  'large-desktop': ( 'min': 1281px, 'max': 1920px )
+  'mobile': (
+    'min': 280px,
+    'max': 576px,
+  ),
+  'tablet': (
+    'min': 768px,
+    'max': 1024px,
+  ),
+  'desktop': (
+    'min': 1025px,
+    'max': 1280px,
+  ),
+  'large-desktop': (
+    'min': 1281px,
+    'max': 1920px,
+  ),
 );
 
 @mixin media($breakpoint) {
   $sizes: map.get($breakpoints, $breakpoint);
   $min: map.get($sizes, 'min');
   $max: map.get($sizes, 'max');
-  
+
   @media only screen and (min-width: $min) and (max-width: $max) {
     @content;
   }

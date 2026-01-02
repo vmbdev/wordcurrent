@@ -2,8 +2,15 @@
 import { ref, watch } from 'vue';
 
 const props = defineProps({
-  from: Number,
-  isGameRunning: Boolean,
+  from: {
+    type: Number,
+    default: 0,
+  },
+  isGameRunning: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
 })
 
 const emit = defineEmits(['timeout']);

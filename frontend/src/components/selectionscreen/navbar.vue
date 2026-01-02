@@ -19,7 +19,8 @@ import LangSelector from './langselector.vue';
   width: 100%;
   height: 4vh;
 
-  &__left, &__right {
+  &__left,
+  &__right {
     display: flex;
     flex-direction: row;
     gap: 0 10px;

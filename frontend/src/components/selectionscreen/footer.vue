@@ -1,6 +1,10 @@
 <template>
   <footer class="footer">
-    <i18n-t keypath="footer.msg" scope="global" tag="span">
+    <i18n-t
+      keypath="footer.msg"
+      scope="global"
+      tag="span"
+    >
       <a
         href="https://github.com/vmbdev/wordcurrent"
         target="_blank"

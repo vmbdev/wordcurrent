@@ -9,8 +9,15 @@ import Stats from '../../helpers/stats.js';
 import settings from '../../settings.js';
 
 const props = defineProps({
-  wordpack: String,
-  startNewGame: Boolean,
+  wordpack: {
+    type: String,
+    required: true,
+  },
+  startNewGame: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
 });
 
 const emit = defineEmits(['gameStart', 'gameTimeout']);
@@ -23,7 +30,7 @@ const game = reactive({
   scrambledWord: '',
   time: 0,
   key: '',
-  lastMistake: 0
+  lastMistake: 0,
 });
 
 watch(() => props.wordpack, (newWp) => {
@@ -49,7 +56,7 @@ const startGame = async () => {
   stats.reset();
 
   emit('gameStart');
-}
+};
 
 const attempt = async () => {
   if (currentUserInput.value.length === game.scrambledWord.length) {
@@ -61,25 +68,24 @@ const attempt = async () => {
       game.scrambledWord = data.word;
       stats.lastPoints = data.points;
       stats.lastWords++;
-    }
-    else game.lastMistake = Date.now();
+    } else game.lastMistake = Date.now();
 
     currentUserInput.value = '';
   }
-}
+};
 
 const keyPressed = (key) => {
   if (key === 'delete') {
-    currentUserInput.value =
-      currentUserInput.value.slice(0, currentUserInput.value.length-1);
-  }
-  else if (key === 'enter') {
+    currentUserInput.value = currentUserInput.value.slice(
+      0,
+      currentUserInput.value.length - 1,
+    );
+  } else if (key === 'enter') {
     attempt();
-  }
-  else if (currentUserInput.value.length < game.scrambledWord.length) {
+  } else if (currentUserInput.value.length < game.scrambledWord.length) {
     currentUserInput.value += key;
   }
-}
+};
 
 const gameTimeout = () => {
   game.isRunning = false;
@@ -95,7 +101,7 @@ const gameTimeout = () => {
   stats.store();
 
   emit('gameTimeout', stats);
-}
+};
 </script>
 
 <template>

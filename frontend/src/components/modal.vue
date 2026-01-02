@@ -1,8 +1,11 @@
 <script setup>
 import CloseButton from './closebutton.vue';
 
-const props = defineProps({
-  caller: String,
+defineProps({
+  caller: {
+    type: String,
+    required: true,
+  },
 });
 
 const emit = defineEmits(['close']);
@@ -10,9 +13,9 @@ const emit = defineEmits(['close']);
 
 <template>
   <div class="modal">
-    <CloseButton @close="emit('close', props.caller)" />
+    <CloseButton @close="emit('close', caller)" />
     <div class="modal__content">
-      <slot></slot>
+      <slot />
     </div>
   </div>
 </template>

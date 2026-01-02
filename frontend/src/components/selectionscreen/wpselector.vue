@@ -3,9 +3,7 @@ import { onMounted, ref, watch } from 'vue';
 import { useGame } from '../../composables/game.js';
 import settings from '../../settings.js';
 
-const emit = defineEmits(['selectWordpack']);
-
-const game = useGame()
+const game = useGame();
 
 const wordpacks = ref([]);
 const currentWordpack = ref();
@@ -32,20 +30,23 @@ onMounted(async () => {
 const selectWordpack = (pack) => {
   localStorage.setItem('WC_wordpack', pack);
   currentWordpack.value = pack;
-}
+};
 </script>
 
 <template>
   <div class="wpselector">
-    <div class="wpselector__title">{{ $t('wpselector.choose' )}}</div>
+    <div class="wpselector__title">
+      {{ $t('wpselector.choose') }}
+    </div>
     <div class="wpselector__options">
       <div
         v-for="pack in wordpacks"
+        :key="pack"
         class="wpselector__item"
         :class="{ 'wpselector__item--active': pack === currentWordpack }"
         @click="selectWordpack(pack)"
       >
-        {{ pack.slice(0,1).toUpperCase() + pack.slice(1) }}
+        {{ pack.slice(0, 1).toUpperCase() + pack.slice(1) }}
       </div>
     </div>
   </div>

@@ -1,11 +1,16 @@
 <script setup>
 const props = defineProps({
-  word: String,
-})
+  word: {
+    type: String,
+    required: true,
+  },
+});
 </script>
 
 <template>
-  <div class="wordinput">{{ props.word }}</div>
+  <div class="wordinput">
+    {{ props.word }}
+  </div>
 </template>
 
 <style lang="scss">

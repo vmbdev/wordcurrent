@@ -38,7 +38,7 @@ const gameTimeout = (stats) => {
   <StatsResults
     v-if="showStats"
     :stats="currentStats"
-    @close="() => { showStats = false }"
+    @close="showStats = false"
   />
   <!-- <PrivacyManager /> -->
 </template>
